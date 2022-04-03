@@ -29,30 +29,80 @@ namespace Ulearn_game
 
             Timer tmr = new Timer();
             tmr.Interval = 50;
-            KeyDown += new KeyEventHandler(Movement);
+            KeyDown += new KeyEventHandler(gameKeyDown);
+            KeyUp += new KeyEventHandler(gameKeyUp);
+            tmr.Tick += new EventHandler(MainLoop);
             tmr.Start();
         }
-        
-        public void Movement(object sender, KeyEventArgs e)
+
+        public void MainLoop(object sender, EventArgs e)
+        {
+            if (player.right)
+            {
+                playerSprite.Left += 10;
+            }
+
+            if (player.left)
+            {
+                playerSprite.Left -= 10;
+            }
+
+            if (player.up)
+            {
+                playerSprite.Top -= 10;
+            }
+
+            if (player.down)
+            {
+                playerSprite.Top += 10;
+            }
+        }
+
+
+
+        public void gameKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.D)
             {
-                playerSprite.Left += 1;
+                player.right = true;
             }
 
             if (e.KeyCode == Keys.A)
             {
-                playerSprite.Left -= 1;
+                player.left = true;
             }
 
             if (e.KeyCode == Keys.W)
             {
-                playerSprite.Top -= 1;
+                player.up = true;
             }
 
             if (e.KeyCode == Keys.S)
             {
-                playerSprite.Top += 1;
+                player.down = true;
+            }
+        }
+
+        public void gameKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D)
+            {
+                player.right = false;
+            }
+
+            if (e.KeyCode == Keys.A)
+            {
+                player.left = false;
+            }
+
+            if (e.KeyCode == Keys.W)
+            {
+                player.up = false;
+            }
+
+            if (e.KeyCode == Keys.S)
+            {
+                player.down = false;
             }
         }
 
@@ -67,10 +117,16 @@ namespace Ulearn_game
 
     class Player : Entity
     {
+
+        public bool up, down, left, right;
         public Player(int health, Image sprite)
         {
             this.Health = health;
             this.Sprite = sprite;
+            up = false;
+            down = false;
+            left = false;
+            right = false;
         }
 
     }
