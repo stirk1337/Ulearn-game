@@ -12,7 +12,8 @@ namespace Ulearn_game
     {
         public int Health;
         public int Damage;
-        public Image Sprite;
+        public Bitmap Sprite;
+        public string Weapon;
     }
     class Bandit : Entity
     {
