@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,7 @@ namespace Ulearn_game
         public int Height;
         public Point Point;
         public float Angle;
+        public int Speed;
 
         public void UpdateAngle()
         {
@@ -37,6 +39,21 @@ namespace Ulearn_game
             g.DrawImage(rotated, Point.X, Point.Y);
         }
 
+        public void IsGettingMeleeDamage()
+        {
+
+            // СЛЕДУЕТ СДЕЛАТЬ ТАК, ЧТОБЫ ОТСЛЕЖИВАЛСЯ КУРСОР МЫШИ, ПРООВЕСТИ ДО НЕЕ ЛИНИИ И УЗНАТЬ, ЕСТЬ ЛИ ТАМ БАНДИТ. 
+            Point player = new Point(Game.Player.Point.X, Game.Player.Point.Y);
+            Point bandit = new Point(Point.X, Point.Y);
+            var distance = Math.Sqrt(Math.Pow(bandit.X - player.X, 2) + Math.Pow(bandit.Y - player.Y, 2));
+            if (Game.Player.isAttacking && distance < 55)
+            {
+                Speed = 0;
+            }
+        }
+
+
+
     }
     public class Bandit : Entity
     {
@@ -49,6 +66,7 @@ namespace Ulearn_game
             Point.Y = point.Y;
             Angle = 0;
             Weapon = "fist";
+            Speed = 5;
         }
 
         public void OnPaint(Graphics g)
@@ -57,43 +75,44 @@ namespace Ulearn_game
             RotateEntity(g);
         }
 
+
         public void ToAttack()
         {
             if (Game.Player.Point.X < Point.X && Game.Player.Point.Y < Point.Y)
             {
-                Point.X -= 10;
-                Point.Y -= 10;
+                Point.X -= Speed;
+                Point.Y -= Speed;
             }
             else if (Game.Player.Point.X < Point.X && Game.Player.Point.Y > Point.Y)
             {
-                Point.X -= 10;
-                Point.Y += 10;
+                Point.X -= Speed;
+                Point.Y += Speed;
             }
             else if (Game.Player.Point.X > Point.X && Game.Player.Point.Y < Point.Y)
             {
-                Point.X += 10;
-                Point.Y -= 10;
+                Point.X += Speed;
+                Point.Y -= Speed;
             }
             else if (Game.Player.Point.X > Point.X && Game.Player.Point.Y > Point.Y)
             {
-                Point.X += 10;
-                Point.Y += 10;
+                Point.X += Speed;
+                Point.Y += Speed;
             }
             else if (Game.Player.Point.X < Point.X && Game.Player.Point.Y == Point.Y)
             {
-                Point.X -= 10;
+                Point.X -= Speed;
             }
             else if (Game.Player.Point.X > Point.X && Game.Player.Point.Y == Point.Y)
             {
-                Point.X += 10;
+                Point.X += Speed;
             }
             else if (Game.Player.Point.Y > Point.Y && Game.Player.Point.X == Point.X)
             {
-                Point.Y += 10;
+                Point.Y += Speed;
             }
             else if (Game.Player.Point.Y < Point.Y && Game.Player.Point.X == Point.X)
             {
-                Point.Y -= 10;
+                Point.Y -= Speed;
             }
         }
     }

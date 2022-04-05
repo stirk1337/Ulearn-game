@@ -33,12 +33,7 @@ namespace Ulearn_game
             tmr.Tick += MainLoop;
             tmr.Start();
         }
-                 
-        public void Init()
-        {
-            
-        }
-
+        
         public void MainLoop(object sender, EventArgs e)
         {
             Invalidate();
@@ -54,6 +49,7 @@ namespace Ulearn_game
             {
                 bandit.OnPaint(g);
                 bandit.UpdateAngle();
+                bandit.IsGettingMeleeDamage();
             }
         }
 

@@ -28,6 +28,7 @@ namespace Ulearn_game
             Point.X = 1200;
             Point.Y = 900;
             Angle = 0;
+            Speed = 20;
             Weapon = "bita1";
             isAttacking = false;
             BitaCurrentFrame = 0;
@@ -43,22 +44,22 @@ namespace Ulearn_game
         {
             if (Right)
             {
-                Point.X += 100;
+                Point.X += Speed;
             }
 
             if (Left)
             {
-                Point.X -= 100;
+                Point.X -= Speed;
             }
             
             if (Up)
             {
-                Point.Y -= 100;
+                Point.Y -= Speed;
             }
 
             if (Down)
             {
-                Point.Y += 100;
+                Point.Y += Speed;
             }
         }
 
