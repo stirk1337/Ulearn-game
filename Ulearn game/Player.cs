@@ -10,25 +10,23 @@ using System.Windows.Forms;
 
 namespace Ulearn_game
 {
-    class Player : Entity
+    public class Player : Entity
     {
         public bool Up, Down, Left, Right;
-        public Point Point;
         public float Angle;
         public Point Mouse;
         public bool isAttacking;
         public int BitaCurrentFrame;
         public Bitmap[] BitaAttack;
-        public Player(int health, Bitmap sprite)
+        public Player(Bitmap sprite)
         {
-            Health = health;
             Sprite = sprite;
             Up = false;
             Down = false;
             Left = false;
             Right = false;
-            Point.X = 0;
-            Point.Y = 0;
+            Point.X = 1200;
+            Point.Y = 900;
             Angle = 0;
             Weapon = "bita1";
             isAttacking = false;
@@ -45,33 +43,39 @@ namespace Ulearn_game
         {
             if (Right)
             {
-                Point.X += 10;
+                Point.X += 100;
             }
 
             if (Left)
             {
-                Point.X -= 10;
+                Point.X -= 100;
             }
             
             if (Up)
             {
-                Point.Y -= 10;
+                Point.Y -= 100;
             }
 
             if (Down)
             {
-                Point.Y += 10;
+                Point.Y += 100;
             }
         }
 
         public void RotatePlayer(Graphics g)
         {
-            g.TranslateTransform(Point.X + Sprite.Width / 2f, Point.Y + Sprite.Height / 2f);
-            g.RotateTransform(Angle);
-            g.TranslateTransform(-(Point.X + Sprite.Width / 2f), -(Point.Y + Sprite.Height / 2f));
+            var rotated = new Bitmap(Sprite.Width, Sprite.Height);
+            using (Graphics fromImage = Graphics.FromImage(rotated))
+            {
+                fromImage.TranslateTransform(Sprite.Width / 2f, Sprite.Height / 2f);
+                fromImage.RotateTransform(Angle);
+                fromImage.TranslateTransform(-(Sprite.Width / 2f), -(Sprite.Height / 2f));
+                fromImage.DrawImage(Sprite, 0,0);
+            }
+            g.DrawImage(rotated, Point.X, Point.Y);
         }
 
-        public void PlayAnimation(Graphics g)
+        public void PlayAnimation()
         {
             if (Weapon == "bita1" && isAttacking && BitaCurrentFrame < 4)
             {
@@ -93,7 +97,7 @@ namespace Ulearn_game
                     isAttacking = false;
                 }
             }
-            else if(Weapon == "bita1")
+            else if (Weapon == "bita1")
             {
                 isAttacking = false;
                 Sprite = Properties.Resources.bita_idle;
@@ -103,26 +107,25 @@ namespace Ulearn_game
                 isAttacking = false;
                 Sprite = Properties.Resources.bita_idle2;
             }
-            g.DrawImage(Sprite, Point.X, Point.Y); 
         }
 
-        public void OnPaint(Graphics g) 
+        public void OnPaint(Graphics g)
         {
+            PlayAnimation();
             RotatePlayer(g);
-            PlayAnimation(g);
         }
 
         public void UpdateAngle(object sender, MouseEventArgs e)
         {
             if (e != null)
             {
-                Angle = (float)Math.Atan2(e.Y - Point.Y , e.X - Point.X) * 180 / (float)Math.PI;
+                Angle = (float)Math.Atan2(e.Y - Point.Y - Sprite.Height/2f , e.X - Point.X - Sprite.Width/2f) * 180 / (float)Math.PI;
                 Mouse.X = e.X;
                 Mouse.Y = e.Y;
             }
             else
             {
-                Angle = (float)Math.Atan2(Mouse.Y - Point.Y, Mouse.X - Point.X) * 180 / (float)Math.PI;
+                Angle = (float)Math.Atan2(Mouse.Y - Point.Y - Sprite.Height/2f, Mouse.X - Point.X - Sprite.Width/2f) * 180 / (float)Math.PI;
             }
         }
 

@@ -10,28 +10,33 @@ using System.Windows.Forms;
 
 namespace Ulearn_game
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
-        private Player _player;
-        public Form1()
+        public static Player Player;
+        public static Bandit[] Bandits;
+        public Game()
         {
             InitializeComponent();
-            Init();
-        }
 
-        public void Init()
-        {
-            _player = new Player(100, Properties.Resources.bita_idle);
+            Player = new Player(Properties.Resources.bita_idle);
+            Bandits = new Bandit[] {new Bandit(new Point(0,0)),
+                                    new Bandit(new Point(200,100)),
+                                    new Bandit(new Point(900,800))};
             var tmr = new Timer();
 
             DoubleBuffered = true;
-            tmr.Interval = 40;
+            tmr.Interval = 30;
             KeyDown += GameKeyDown;
             KeyUp += GameKeyUp;
-            MouseMove += _player.UpdateAngle;
-            MouseClick += _player.Attack;
+            MouseMove += Player.UpdateAngle;
+            MouseClick += Player.Attack;
             tmr.Tick += MainLoop;
             tmr.Start();
+        }
+                 
+        public void Init()
+        {
+            
         }
 
         public void MainLoop(object sender, EventArgs e)
@@ -41,27 +46,31 @@ namespace Ulearn_game
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var playerSprite = e.Graphics;
-            _player.Movement();
-            _player.OnPaint(playerSprite);
-            _player.UpdateAngle(null, null);
-
+            var g = e.Graphics;
+            Player.Movement();
+            Player.OnPaint(g);
+            Player.UpdateAngle(null, null);
+            foreach (var bandit in Bandits)
+            {
+                bandit.OnPaint(g);
+                bandit.UpdateAngle();
+            }
         }
 
         public void GameKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D) { _player.Right = true; }
-            if (e.KeyCode == Keys.A) { _player.Left = true; }
-            if (e.KeyCode == Keys.W) { _player.Up = true; }
-            if (e.KeyCode == Keys.S) { _player.Down = true; }
+            if (e.KeyCode == Keys.D) { Player.Right = true; }
+            if (e.KeyCode == Keys.A) { Player.Left = true; }
+            if (e.KeyCode == Keys.W) { Player.Up = true; }
+            if (e.KeyCode == Keys.S) { Player.Down = true; }
         }
 
         public void GameKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D) { _player.Right = false; }
-            if (e.KeyCode == Keys.A) { _player.Left = false; }
-            if (e.KeyCode == Keys.W) { _player.Up = false; }
-            if (e.KeyCode == Keys.S) { _player.Down = false; }
+            if (e.KeyCode == Keys.D) { Player.Right = false; }
+            if (e.KeyCode == Keys.A) { Player.Left = false; }
+            if (e.KeyCode == Keys.W) { Player.Up = false; }
+            if (e.KeyCode == Keys.S) { Player.Down = false; }
         }
     }
 

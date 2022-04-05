@@ -63,6 +63,16 @@ namespace Ulearn_game.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bandit {
+            get {
+                object obj = ResourceManager.GetObject("bandit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bita_attack1 {
             get {
                 object obj = ResourceManager.GetObject("bita_attack1", resourceCulture);

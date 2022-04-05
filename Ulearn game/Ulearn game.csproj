@@ -112,5 +112,23 @@
   <ItemGroup>
     <None Include="src\player\bita\bita_idle2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\player\bita\bita_attack1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\player\bita\bita_attack2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\player\bita\bita_attack3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\player\bita\bita_idle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\player\bita\bita_idle2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\bandit\bandit.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

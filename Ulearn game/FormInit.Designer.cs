@@ -1,6 +1,6 @@
 ﻿namespace Ulearn_game
 {
-    partial class Form1
+    partial class Game
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 561);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Name = "Game";
+            this.Text = "Game";
             this.ResumeLayout(false);
 
         }
