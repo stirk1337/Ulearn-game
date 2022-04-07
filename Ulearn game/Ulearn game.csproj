@@ -130,5 +130,56 @@
   <ItemGroup>
     <None Include="src\bandit\bandit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch1_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch1_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch1_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch1_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch1_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch1_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch1_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch2_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch2_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch2_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch2_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch2_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch2_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\punch2_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\jacket_idle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\bandit\bandit_dead.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\bandit\bandit_dead.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ulearn_game.Properties;
 
 
 namespace Ulearn_game
@@ -16,11 +17,14 @@ namespace Ulearn_game
         public float Angle;
         public Point Mouse;
         public bool isAttacking;
-        public int BitaCurrentFrame;
-        public Bitmap[] BitaAttack;
-        public Player(Bitmap sprite)
+        public int CurrentFrame;
+        public Bitmap[] Punch1;
+        public Bitmap[] Punch2;
+        public Player()
         {
-            Sprite = sprite;
+            Width = 160;
+            Height = 160;
+            Sprite = new Bitmap(Properties.Resources.jacket_idle, Width, Height);
             Up = false;
             Down = false;
             Left = false;
@@ -28,17 +32,32 @@ namespace Ulearn_game
             Point.X = 1200;
             Point.Y = 900;
             Angle = 0;
-            Speed = 20;
-            Weapon = "bita1";
+            Speed = 10;
+            Weapon = "punch1";
             isAttacking = false;
-            BitaCurrentFrame = 0;
-            BitaAttack = new Bitmap[]
+            CurrentFrame = 0;
+            DieAngle = Angle + 180;
+            Punch1 = new Bitmap[]
             {
-                Properties.Resources.bita_attack1,
-                Properties.Resources.bita_attack2,
-                Properties.Resources.bita_attack3,
+                new Bitmap(Properties.Resources.punch1_0, Width, Height),
+                new Bitmap(Properties.Resources.punch1_1, Width, Height),
+                new Bitmap(Properties.Resources.punch1_2, Width, Height),
+                new Bitmap(Properties.Resources.punch1_3, Width, Height),
+                new Bitmap(Properties.Resources.punch1_4, Width, Height),
+                new Bitmap(Properties.Resources.punch1_5, Width, Height),
+                new Bitmap(Properties.Resources.punch1_6, Width, Height),
             };
-            
+            Punch2 = new Bitmap[]
+            {
+                new Bitmap(Properties.Resources.punch2_0, Width, Height),
+                new Bitmap(Properties.Resources.punch2_1, Width, Height),
+                new Bitmap(Properties.Resources.punch2_2, Width, Height),
+                new Bitmap(Properties.Resources.punch2_3, Width, Height),
+                new Bitmap(Properties.Resources.punch2_4, Width, Height),
+                new Bitmap(Properties.Resources.punch2_5, Width, Height),
+                new Bitmap(Properties.Resources.punch2_6, Width, Height),
+            };
+
         }
         public void Movement()
         {
@@ -65,48 +84,50 @@ namespace Ulearn_game
 
         public void RotatePlayer(Graphics g)
         {
-            var rotated = new Bitmap(Sprite.Width, Sprite.Height);
+            var rotated = new Bitmap(Width, Height);
             using (Graphics fromImage = Graphics.FromImage(rotated))
             {
-                fromImage.TranslateTransform(Sprite.Width / 2f, Sprite.Height / 2f);
+                fromImage.TranslateTransform(Width / 2f, Height / 2f);
                 fromImage.RotateTransform(Angle);
-                fromImage.TranslateTransform(-(Sprite.Width / 2f), -(Sprite.Height / 2f));
-                fromImage.DrawImage(Sprite, 0,0);
+                fromImage.TranslateTransform(-(Width / 2f), -(Height / 2f));
+                fromImage.DrawImage(Sprite, 0,0, Width, Height);
             }
-            g.DrawImage(rotated, Point.X, Point.Y);
+            g.DrawImage(rotated, Point.X, Point.Y, Width, Height);
         }
 
         public void PlayAnimation()
         {
-            if (Weapon == "bita1" && isAttacking && BitaCurrentFrame < 4)
+            if (Weapon == "punch1" && isAttacking && CurrentFrame < Punch1.Length)
             {
-                Sprite = BitaAttack[BitaCurrentFrame];
-                BitaCurrentFrame++;
-                if (BitaCurrentFrame == 3)
+                Sprite = Punch1[CurrentFrame];
+                CurrentFrame++;
+                if (CurrentFrame == Punch1.Length - 1)
                 {
-                    Weapon = "bita2";
+                    Weapon = "punch2";
                     isAttacking = false;
+                    CurrentFrame = 0;
                 }
             }
-            else if (Weapon == "bita2" && isAttacking && 0 <= BitaCurrentFrame)
+            else if (Weapon == "punch2" && isAttacking && CurrentFrame < Punch2.Length)
             {
-                Sprite = BitaAttack[BitaCurrentFrame - 1];
-                BitaCurrentFrame--;
-                if (BitaCurrentFrame == 0)
+                Sprite = Punch2[CurrentFrame];
+                CurrentFrame++;
+                if (CurrentFrame == Punch2.Length - 1)
                 {
-                    Weapon = "bita1";
+                    Weapon = "punch1";
                     isAttacking = false;
+                    CurrentFrame = 0;
                 }
             }
-            else if (Weapon == "bita1")
+            else if (Weapon == "punch1")
             {
                 isAttacking = false;
-                Sprite = Properties.Resources.bita_idle;
+                Sprite = new Bitmap(Properties.Resources.jacket_idle, Width, Height);
             }
-            else if (Weapon == "bita2")
+            else if (Weapon == "punch2")
             {
                 isAttacking = false;
-                Sprite = Properties.Resources.bita_idle2;
+                Sprite = new Bitmap(Properties.Resources.jacket_idle, Width, Height);
             }
         }
 
@@ -120,13 +141,13 @@ namespace Ulearn_game
         {
             if (e != null)
             {
-                Angle = (float)Math.Atan2(e.Y - Point.Y - Sprite.Height/2f , e.X - Point.X - Sprite.Width/2f) * 180 / (float)Math.PI;
+                Angle = (float)Math.Atan2(e.Y - Point.Y - Height/2f , e.X - Point.X - Width/2f) * 180 / (float)Math.PI;
                 Mouse.X = e.X;
                 Mouse.Y = e.Y;
             }
             else
             {
-                Angle = (float)Math.Atan2(Mouse.Y - Point.Y - Sprite.Height/2f, Mouse.X - Point.X - Sprite.Width/2f) * 180 / (float)Math.PI;
+                Angle = (float)Math.Atan2(Mouse.Y - Point.Y - Height/2f, Mouse.X - Point.X - Width/2f) * 180 / (float)Math.PI;
             }
         }
 

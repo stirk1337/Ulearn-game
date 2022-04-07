@@ -18,10 +18,13 @@ namespace Ulearn_game
         {
             InitializeComponent();
 
-            Player = new Player(Properties.Resources.bita_idle);
-            Bandits = new Bandit[] {new Bandit(new Point(0,0)),
-                                    new Bandit(new Point(200,100)),
-                                    new Bandit(new Point(900,800))};
+            Player = new Player();
+            Bandits = new Bandit[]
+            {
+                new Bandit(new Point(300,100)),
+                new Bandit(new Point(1000 ,500)),
+                new Bandit(new Point(500, 600)),
+            };
             var tmr = new Timer();
 
             DoubleBuffered = true;
@@ -47,9 +50,22 @@ namespace Ulearn_game
             Player.UpdateAngle(null, null);
             foreach (var bandit in Bandits)
             {
-                bandit.OnPaint(g);
-                bandit.UpdateAngle();
-                bandit.IsGettingMeleeDamage();
+                if (!bandit.IsDead)
+                {
+                    bandit.OnPaint(g);
+                    bandit.UpdateAngleToPlayer();
+                    bandit.IsGettingMeleeDamage();
+                    bandit.UpdateAngleFromPlayer();
+                }
+                else
+                {
+                    bandit.Sprite = Properties.Resources.bandit_dead;
+                    bandit.Height = 150;
+                    bandit.Width = 150;
+                    bandit.Speed = 0;
+                    bandit.AngleToPlayer = bandit.AngleFromPlayer;
+                    bandit.OnPaint(g);
+                }
             }
         }
 

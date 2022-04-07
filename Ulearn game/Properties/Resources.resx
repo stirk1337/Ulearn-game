@@ -121,6 +121,9 @@
   <data name="bandit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\bandit\bandit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bandit_dead" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\bandit\bandit_dead.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bita_attack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\player\bita\bita_attack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,10 +139,49 @@
   <data name="bita_idle2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\player\bita\bita_idle2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="jacket_idle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\jacket_idle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\54427.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="punch1_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch1_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch1_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch1_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch1_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch1_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch1_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch1_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch1_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch1_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch1_5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch1_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch1_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch2_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch2_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch2_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch2_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch2_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch2_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch2_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch2_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch2_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch2_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch2_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch2_5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punch2_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\jacket\punch2_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

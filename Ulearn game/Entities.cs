@@ -16,57 +16,75 @@ namespace Ulearn_game
         public int Width;
         public int Height;
         public Point Point;
-        public float Angle;
+        public float AngleToPlayer;
+        public float AngleFromPlayer;
         public int Speed;
+        public bool IsDead;
+        public float DieAngle;
 
-        public void UpdateAngle()
+        public void UpdateAngleToPlayer()
         {
-            var y = Game.Player.Point.Y + Game.Player.Sprite.Height / 2f - Point.Y + Sprite.Height / 2f;
-            var x = Game.Player.Point.X + Game.Player.Sprite.Width / 2f - Point.X + Sprite.Width / 2f;
-            Angle = (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
+            var y = Game.Player.Point.Y + Game.Player.Sprite.Height / 2f - Point.Y - Sprite.Height / 2f;
+            var x = Game.Player.Point.X + Game.Player.Sprite.Width / 2f - Point.X - Sprite.Width / 2f;
+            AngleToPlayer = (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
+        }
+
+        public void UpdateAngleFromPlayer()
+        {
+            var y = Point.Y + Sprite.Height / 2f - Game.Player.Point.Y - Game.Player.Sprite.Height / 2f;
+            var x = Point.X + Sprite.Width / 2f - Game.Player.Point.X - Game.Player.Sprite.Width / 2f;
+            AngleFromPlayer = (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
+            DieAngle = AngleFromPlayer + 180;
         }
 
         public void RotateEntity(Graphics g)
         {
-            var rotated = new Bitmap(Sprite.Width, Sprite.Height);
+            var rotated = new Bitmap(Width, Height);
             using (Graphics fromImage = Graphics.FromImage(rotated))
             {
-                fromImage.TranslateTransform(Sprite.Width / 2f, Sprite.Height / 2f);
-                fromImage.RotateTransform(Angle);
-                fromImage.TranslateTransform(-(Sprite.Width / 2f), -(Sprite.Height / 2f));
-                fromImage.DrawImage(Sprite, 0, 0);
+                fromImage.TranslateTransform(Width / 2f, Height / 2f);
+                fromImage.RotateTransform(AngleToPlayer);
+                fromImage.TranslateTransform(-(Width / 2f), -(Height / 2f));
+                fromImage.DrawImage(Sprite, 0, 0, Width, Height);
             }
-            g.DrawImage(rotated, Point.X, Point.Y);
+            g.DrawImage(rotated, Point.X, Point.Y, Width, Height);
         }
 
         public void IsGettingMeleeDamage()
         {
-
-            // СЛЕДУЕТ СДЕЛАТЬ ТАК, ЧТОБЫ ОТСЛЕЖИВАЛСЯ КУРСОР МЫШИ, ПРООВЕСТИ ДО НЕЕ ЛИНИИ И УЗНАТЬ, ЕСТЬ ЛИ ТАМ БАНДИТ. 
-            Point player = new Point(Game.Player.Point.X, Game.Player.Point.Y);
-            Point bandit = new Point(Point.X, Point.Y);
+            Point player = new Point(Game.Player.Point.X + Game.Player.Width/2, Game.Player.Point.Y + Game.Player.Height/2);
+            Point bandit = new Point(Point.X + Width/2, Point.Y + Height/2);
+            var EPS = 50;
             var distance = Math.Sqrt(Math.Pow(bandit.X - player.X, 2) + Math.Pow(bandit.Y - player.Y, 2));
-            if (Game.Player.isAttacking && distance < 55)
+            float range;
+            if (Game.Player.Angle < AngleFromPlayer)
             {
-                Speed = 0;
+                range = AngleFromPlayer - Game.Player.Angle;
+            }
+            else
+            {
+                range = Game.Player.Angle - AngleFromPlayer;
+            }
+            if (Game.Player.isAttacking && distance < 90 && Math.Abs(range) < EPS)
+            {
+                IsDead = true;
             }
         }
-
-
-
     }
     public class Bandit : Entity
     {
         public Bandit(Point point)
         {
             Sprite = Properties.Resources.bandit;
-            Width = 60;
-            Height = 60;
+            Width = 80;
+            Height = 80;
             Point.X = point.X;
             Point.Y = point.Y;
-            Angle = 0;
+            AngleToPlayer = 0;
             Weapon = "fist";
-            Speed = 5;
+            Speed = 3;
+            IsDead = false;
+            DieAngle = AngleToPlayer + 180;
         }
 
         public void OnPaint(Graphics g)
@@ -74,7 +92,6 @@ namespace Ulearn_game
             ToAttack();
             RotateEntity(g);
         }
-
 
         public void ToAttack()
         {
@@ -116,5 +133,4 @@ namespace Ulearn_game
             }
         }
     }
-
 }
