@@ -11,15 +11,21 @@ using Ulearn_game.Properties;
 
 namespace Ulearn_game
 {
-    public class Player : Entity
+    public class Player
     {
         public bool Up, Down, Left, Right;
+        public int Width;
+        public int Height;
+        public Bitmap Sprite;
         public float Angle;
         public Point Mouse;
+        public Point Point;
         public bool IsAttacking;
         public int CurrentFrame;
         public Bitmap[] Punch1;
         public Bitmap[] Punch2;
+        public int Speed;
+        public string Weapon;
         public Player()
         {
             Width = 160;
@@ -29,8 +35,7 @@ namespace Ulearn_game
             Down = false;
             Left = false;
             Right = false;
-            Point.X = 1200;
-            Point.Y = 900;
+            Point = new Point(1200, 900);
             Angle = 0;
             Speed = 10;
             Weapon = "punch1";
@@ -60,10 +65,10 @@ namespace Ulearn_game
         }
         public void Movement()
         {
-            if (Right) { Point.X += Speed; }
-            if (Left) { Point.X -= Speed; }
-            if (Up) { Point.Y -= Speed; } 
-            if (Down) { Point.Y += Speed; }
+            if (Right) { Point = new Point(Point.X + Speed, Point.Y); }
+            if (Left) { Point = new Point(Point.X - Speed, Point.Y); }
+            if (Up) { Point = new Point(Point.X, Point.Y - Speed); } 
+            if (Down) { Point = new Point(Point.X, Point.Y + Speed); }
         }
 
         public void RotatePlayer(Graphics g)

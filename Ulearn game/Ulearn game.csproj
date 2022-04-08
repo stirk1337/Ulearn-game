@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities.cs" />
-    <Compile Include="Interface1.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="FormInit.cs">
       <SubType>Form</SubType>
