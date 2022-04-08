@@ -45,27 +45,11 @@ namespace Ulearn_game
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
-            Player.Movement();
             Player.OnPaint(g);
-            Player.UpdateAngle(null, null);
             foreach (var bandit in Bandits)
             {
-                if (!bandit.IsDead)
-                {
-                    bandit.OnPaint(g);
-                    bandit.UpdateAngleToPlayer();
-                    bandit.IsGettingMeleeDamage();
-                    bandit.UpdateAngleFromPlayer();
-                }
-                else
-                {
-                    bandit.Sprite = Properties.Resources.bandit_dead;
-                    bandit.Height = 150;
-                    bandit.Width = 150;
-                    bandit.Speed = 0;
-                    bandit.AngleToPlayer = bandit.AngleFromPlayer;
-                    bandit.OnPaint(g);
-                }
+                if (!bandit.IsDead) { bandit.Alive(g); }
+                else { bandit.Dead(g); }
             }
         }
 

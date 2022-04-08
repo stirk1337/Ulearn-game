@@ -20,7 +20,6 @@ namespace Ulearn_game
         public float AngleFromPlayer;
         public int Speed;
         public bool IsDead;
-        public float DieAngle;
 
         public void UpdateAngleToPlayer()
         {
@@ -34,7 +33,6 @@ namespace Ulearn_game
             var y = Point.Y + Sprite.Height / 2f - Game.Player.Point.Y - Game.Player.Sprite.Height / 2f;
             var x = Point.X + Sprite.Width / 2f - Game.Player.Point.X - Game.Player.Sprite.Width / 2f;
             AngleFromPlayer = (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
-            DieAngle = AngleFromPlayer + 180;
         }
 
         public void RotateEntity(Graphics g)
@@ -65,7 +63,7 @@ namespace Ulearn_game
             {
                 range = Game.Player.Angle - AngleFromPlayer;
             }
-            if (Game.Player.isAttacking && distance < 90 && Math.Abs(range) < EPS)
+            if (Game.Player.IsAttacking && distance < 90 && Math.Abs(range) < EPS)
             {
                 IsDead = true;
             }
@@ -84,7 +82,6 @@ namespace Ulearn_game
             Weapon = "fist";
             Speed = 3;
             IsDead = false;
-            DieAngle = AngleToPlayer + 180;
         }
 
         public void OnPaint(Graphics g)
@@ -93,6 +90,23 @@ namespace Ulearn_game
             RotateEntity(g);
         }
 
+        public void Alive(Graphics g)
+        {
+            OnPaint(g);
+            UpdateAngleToPlayer();
+            IsGettingMeleeDamage();
+            UpdateAngleFromPlayer();
+        }
+
+        public void Dead(Graphics g)
+        {
+            Sprite = Properties.Resources.bandit_dead;
+            Height = 150;
+            Width = 150;
+            Speed = 0;
+            AngleToPlayer = AngleFromPlayer;
+            OnPaint(g);
+        }
         public void ToAttack()
         {
             if (Game.Player.Point.X < Point.X && Game.Player.Point.Y < Point.Y)

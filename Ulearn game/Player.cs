@@ -16,7 +16,7 @@ namespace Ulearn_game
         public bool Up, Down, Left, Right;
         public float Angle;
         public Point Mouse;
-        public bool isAttacking;
+        public bool IsAttacking;
         public int CurrentFrame;
         public Bitmap[] Punch1;
         public Bitmap[] Punch2;
@@ -34,9 +34,8 @@ namespace Ulearn_game
             Angle = 0;
             Speed = 10;
             Weapon = "punch1";
-            isAttacking = false;
+            IsAttacking = false;
             CurrentFrame = 0;
-            DieAngle = Angle + 180;
             Punch1 = new Bitmap[]
             {
                 new Bitmap(Properties.Resources.punch1_0, Width, Height),
@@ -61,29 +60,16 @@ namespace Ulearn_game
         }
         public void Movement()
         {
-            if (Right)
-            {
-                Point.X += Speed;
-            }
-
-            if (Left)
-            {
-                Point.X -= Speed;
-            }
-            
-            if (Up)
-            {
-                Point.Y -= Speed;
-            }
-
-            if (Down)
-            {
-                Point.Y += Speed;
-            }
+            if (Right) { Point.X += Speed; }
+            if (Left) { Point.X -= Speed; }
+            if (Up) { Point.Y -= Speed; } 
+            if (Down) { Point.Y += Speed; }
         }
 
         public void RotatePlayer(Graphics g)
         {
+            Movement();
+            UpdateAngle(null, null);
             var rotated = new Bitmap(Width, Height);
             using (Graphics fromImage = Graphics.FromImage(rotated))
             {
@@ -97,36 +83,36 @@ namespace Ulearn_game
 
         public void PlayAnimation()
         {
-            if (Weapon == "punch1" && isAttacking && CurrentFrame < Punch1.Length)
+            if (Weapon == "punch1" && IsAttacking && CurrentFrame < Punch1.Length)
             {
                 Sprite = Punch1[CurrentFrame];
                 CurrentFrame++;
                 if (CurrentFrame == Punch1.Length - 1)
                 {
                     Weapon = "punch2";
-                    isAttacking = false;
+                    IsAttacking = false;
                     CurrentFrame = 0;
                 }
             }
-            else if (Weapon == "punch2" && isAttacking && CurrentFrame < Punch2.Length)
+            else if (Weapon == "punch2" && IsAttacking && CurrentFrame < Punch2.Length)
             {
                 Sprite = Punch2[CurrentFrame];
                 CurrentFrame++;
                 if (CurrentFrame == Punch2.Length - 1)
                 {
                     Weapon = "punch1";
-                    isAttacking = false;
+                    IsAttacking = false;
                     CurrentFrame = 0;
                 }
             }
             else if (Weapon == "punch1")
             {
-                isAttacking = false;
+                IsAttacking = false;
                 Sprite = new Bitmap(Properties.Resources.jacket_idle, Width, Height);
             }
             else if (Weapon == "punch2")
             {
-                isAttacking = false;
+                IsAttacking = false;
                 Sprite = new Bitmap(Properties.Resources.jacket_idle, Width, Height);
             }
         }
@@ -153,8 +139,7 @@ namespace Ulearn_game
 
         public void Attack(object sender, MouseEventArgs e)
         {
-            isAttacking = true;
+            IsAttacking = true;
         }
-        
     }
 }
