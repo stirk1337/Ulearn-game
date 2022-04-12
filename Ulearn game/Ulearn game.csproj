@@ -182,5 +182,17 @@
   <ItemGroup>
     <None Include="src\bandit\bandit_dead.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\jacket_dead_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\jacket_dead_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\jacket_dead_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\jacket_dead_2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

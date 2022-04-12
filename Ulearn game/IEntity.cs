@@ -14,16 +14,16 @@ namespace Ulearn_game
         string Weapon { get; set; }
         int Width { get; set; }
         int Height { get; set; }
-        Point Point { get; set; }
+        Point Point { get; set; }   
         int Speed { get; set; }
         bool IsDead { get; set; }
         float DeadAngle { get; set; }
-        float GetAngleToTarget(Point playerPoint, int playerWidth, int playerHeight, string target);
-        void OnPaint(Graphics g, float angle);
+        float GetAngleToTarget(Point targetPoint, int targetWidth, int targetHeight, string target);
+        void OnPaint(Graphics g);
         void IsGettingMeleeDamage();
         void Alive(Graphics g);
         void Dead(Graphics g);
-        void MoveEntity();
+        void Move();
         void PlayAnimation();
 
     }

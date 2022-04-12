@@ -39,8 +39,8 @@ namespace Ulearn_game
 
         public void Alive(Graphics g)
         {
-            MoveEntity();
-            OnPaint(g, GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "player"));
+            Move();
+            OnPaint(g);
             IsGettingMeleeDamage();
         }
 
@@ -52,7 +52,7 @@ namespace Ulearn_game
             Speed = 0;
             if(DeadAngle == -1)
                     DeadAngle = GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
-            OnPaint(g, DeadAngle);
+            OnPaint(g);
         }
 
         public float GetAngleToTarget(Point playerPoint, int playerWidth, int playerHeight, string target)
@@ -61,7 +61,8 @@ namespace Ulearn_game
             var x = target == "player" ? playerPoint.X + playerWidth / 2f - Point.X - Width / 2f : Point.X + Width / 2f - playerPoint.X - playerWidth / 2f;
             return (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
         }
-        public void OnPaint(Graphics g, float angle)
+
+        public void Rotate(Graphics g, float angle)
         {
             var rotated = new Bitmap(Width, Height);
             using (Graphics fromImage = Graphics.FromImage(rotated))
@@ -72,6 +73,14 @@ namespace Ulearn_game
                 fromImage.DrawImage(Sprite, 0, 0, Width, Height);
             }
             g.DrawImage(rotated, Point.X, Point.Y, Width, Height);
+        }
+
+        public void OnPaint(Graphics g)
+        {
+            var angle = IsDead
+                ? DeadAngle
+                : GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "player");
+            Rotate(g, angle);
         }
         public void IsGettingMeleeDamage()
         {
@@ -85,7 +94,7 @@ namespace Ulearn_game
                 IsDead = true;
         }
 
-        public void MoveEntity()
+        public void Move()
         {
             if (Game.Player.Point.X < Point.X && Game.Player.Point.Y < Point.Y)
             {

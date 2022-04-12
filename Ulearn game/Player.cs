@@ -11,21 +11,28 @@ using Ulearn_game.Properties;
 
 namespace Ulearn_game
 {
-    public class Player
+    public class Player: IEntity
     {
         public bool Up, Down, Left, Right;
-        public int Width;
-        public int Height;
-        public Bitmap Sprite;
-        public float Angle;
-        public Point Mouse;
-        public Point Point;
-        public bool IsAttacking;
-        public int CurrentFrame;
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public Bitmap Sprite { get; set; }
+        public float Angle { get; set; }
+        public Point Mouse { get; set; }
+        public Point Point { get; set; }
+        public bool IsAttacking { get; set; } 
+        public int CurrentFrame { get; set; }
         public Bitmap[] Punch1;
         public Bitmap[] Punch2;
-        public int Speed;
-        public string Weapon;
+        public Bitmap[] DeadSprites;
+        public int Speed { get; set; }
+        public string Weapon { get; set; }
+        public bool IsDead { get; set; }
+        public float DeadAngle { get; set; }
+        public Point KillerPoint { get; set; }
+        public int KillerHeight { get; set; }
+        public int KillerWidth { get; set; }
+
         public Player()
         {
             Width = 160;
@@ -41,6 +48,7 @@ namespace Ulearn_game
             Weapon = "punch1";
             IsAttacking = false;
             CurrentFrame = 0;
+            IsDead = false;
             Punch1 = new Bitmap[]
             {
                 new Bitmap(Properties.Resources.punch1_0, Width, Height),
@@ -61,9 +69,16 @@ namespace Ulearn_game
                 new Bitmap(Properties.Resources.punch2_5, Width, Height),
                 new Bitmap(Properties.Resources.punch2_6, Width, Height),
             };
+            DeadSprites = new Bitmap[]
+            {
+                new Bitmap(Properties.Resources.jacket_dead_1, Width, Height),
+                new Bitmap(Properties.Resources.jacket_dead_2, Width, Height),
+                new Bitmap(Properties.Resources.jacket_dead_3, Width, Height),
+                new Bitmap(Properties.Resources.jacket_dead_3, Width, Height),
+            };
 
         }
-        public void Movement()
+        public void Move()
         {
             if (Right) { Point = new Point(Point.X + Speed, Point.Y); }
             if (Left) { Point = new Point(Point.X - Speed, Point.Y); }
@@ -71,15 +86,13 @@ namespace Ulearn_game
             if (Down) { Point = new Point(Point.X, Point.Y + Speed); }
         }
 
-        public void RotatePlayer(Graphics g)
+        public void RotatePlayer(Graphics g, float angle)
         {
-            Movement();
-            UpdateAngle(null, null);
             var rotated = new Bitmap(Width, Height);
             using (Graphics fromImage = Graphics.FromImage(rotated))
             {
                 fromImage.TranslateTransform(Width / 2f, Height / 2f);
-                fromImage.RotateTransform(Angle);
+                fromImage.RotateTransform(angle);
                 fromImage.TranslateTransform(-(Width / 2f), -(Height / 2f));
                 fromImage.DrawImage(Sprite, 0,0, Width, Height);
             }
@@ -124,8 +137,9 @@ namespace Ulearn_game
 
         public void OnPaint(Graphics g)
         {
-            PlayAnimation();
-            RotatePlayer(g);
+            UpdateAngle(null, null);
+            var angle = IsDead ? GetAngleToTarget(KillerPoint, KillerWidth, KillerHeight, "")+180 : Angle;
+            RotatePlayer(g, angle);
         }
 
         public void UpdateAngle(object sender, MouseEventArgs e)
@@ -133,8 +147,7 @@ namespace Ulearn_game
             if (e != null)
             {
                 Angle = (float)Math.Atan2(e.Y - Point.Y - Height/2f , e.X - Point.X - Width/2f) * 180 / (float)Math.PI;
-                Mouse.X = e.X;
-                Mouse.Y = e.Y;
+                Mouse = new Point(e.X, e.Y);
             }
             else
             {
@@ -145,6 +158,50 @@ namespace Ulearn_game
         public void Attack(object sender, MouseEventArgs e)
         {
             IsAttacking = true;
+        }
+
+        public float GetAngleToTarget(Point targetPoint, int targetWidth, int targetHeight, string target)
+        {
+            var y = targetPoint.Y + targetHeight / 2f - Point.Y - Height / 2f;
+            var x = targetPoint.X + targetHeight / 2f - Point.X - Width / 2f;
+            return (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
+        }
+
+        public void IsGettingMeleeDamage()
+        {
+            foreach (var bandit in Game.Bandits)
+            {
+                var banditPoint = new Point(bandit.Point.X + bandit.Width / 2, bandit.Point.Y + bandit.Height / 2);
+                var playerPoint = new Point(Point.X + Width / 2, Point.Y + Height / 2);
+                var distance = Math.Sqrt(Math.Pow(banditPoint.X - playerPoint.X, 2) + Math.Pow(banditPoint.Y - playerPoint.Y, 2));
+                if (distance < 70 && !bandit.IsDead)
+                {
+                    IsDead = true;
+                    KillerPoint = new Point(bandit.Point.X, bandit.Point.Y);
+                    KillerHeight = bandit.Height;
+                    KillerWidth = bandit.Width;
+                }
+            }
+        }
+
+        public void Alive(Graphics g)
+        {
+            OnPaint(g);
+            Move();
+            IsGettingMeleeDamage();
+            PlayAnimation();
+        }
+
+        public void Dead(Graphics g)
+        {
+            var rnd = new Random();
+            var random = rnd.Next(0, Game.Bandits.Length);
+            if (Speed != 0)
+            {
+                Sprite = DeadSprites[random];
+                Speed = 0;
+            }
+            OnPaint(g);
         }
     }
 }

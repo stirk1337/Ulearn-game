@@ -29,7 +29,7 @@ namespace Ulearn_game
 
             DoubleBuffered = true;
             tmr.Interval = 30;
-            KeyDown += GameKeyDown;
+               KeyDown += GameKeyDown;
             KeyUp += GameKeyUp;
             MouseMove += Player.UpdateAngle;
             MouseClick += Player.Attack;
@@ -45,13 +45,14 @@ namespace Ulearn_game
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
-            Player.OnPaint(g);
             foreach (var bandit in Bandits)
             {
                 if (!bandit.IsDead) { bandit.Alive(g); }
                 else { bandit.Dead(g); }
             }
-        }
+            if(!Player.IsDead) { Player.Alive(g); }
+            else { Player.Dead(g); }
+        }   
 
         public void GameKeyDown(object sender, KeyEventArgs e)
         {
