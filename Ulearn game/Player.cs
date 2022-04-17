@@ -201,6 +201,7 @@ namespace Ulearn_game
                 Sprite = DeadSprites[random];
                 Speed = 0;
             }
+
             OnPaint(g);
         }
     }

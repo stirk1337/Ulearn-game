@@ -14,6 +14,7 @@ namespace Ulearn_game
     {
         public static Player Player;
         public static Bandit[] Bandits;
+        Timer mainTimer = new Timer();
         public Game()
         {
             InitializeComponent();
@@ -25,16 +26,15 @@ namespace Ulearn_game
                 new Bandit(new Point(1000 ,500)),
                 new Bandit(new Point(500, 600)),
             };
-            var tmr = new Timer();
 
             DoubleBuffered = true;
-            tmr.Interval = 30;
+            mainTimer.Interval = 20;
                KeyDown += GameKeyDown;
             KeyUp += GameKeyUp;
             MouseMove += Player.UpdateAngle;
             MouseClick += Player.Attack;
-            tmr.Tick += MainLoop;
-            tmr.Start();
+            mainTimer.Tick += MainLoop;
+            mainTimer.Start();
         }
         
         public void MainLoop(object sender, EventArgs e)
@@ -51,7 +51,11 @@ namespace Ulearn_game
                 else { bandit.Dead(g); }
             }
             if(!Player.IsDead) { Player.Alive(g); }
-            else { Player.Dead(g); }
+            else
+            {
+                Player.Dead(g); 
+                mainTimer.Stop();
+            }
         }   
 
         public void GameKeyDown(object sender, KeyEventArgs e)
