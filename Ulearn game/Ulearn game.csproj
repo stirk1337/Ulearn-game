@@ -206,5 +206,8 @@
   <ItemGroup>
     <None Include="src\texture\floor_blue.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\texture\brick.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

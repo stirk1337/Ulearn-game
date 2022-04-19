@@ -42,7 +42,7 @@ namespace Ulearn_game
             Down = false;
             Left = false;
             Right = false;
-            Point = new Point(1200, 900);
+            Point = new Point(150, 600);
             Angle = 0;
             Speed = 10;
             Weapon = "punch1";
