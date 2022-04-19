@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -27,7 +28,7 @@ namespace Ulearn_game
             Height = 80;
             Point = new Point(point.X, point.Y);
             Weapon = "fist";
-            Speed = 0;
+            Speed = 3;
             IsDead = false;
             DeadAngle = -1;
         }
@@ -93,6 +94,15 @@ namespace Ulearn_game
             if (Game.Player.IsAttacking && distance < 90 && Math.Abs(range) < 50)
                 IsDead = true;
         }
+            
+        public bool IsWall()
+        {
+            var x = (Point.X + Width / 2) / 100;
+            var y = (Point.Y + Height / 2) / 100;
+            if (Game.Level[x, y] == 2)
+                return true;
+            return false;
+        }
 
         public void Move()
         {
@@ -100,38 +110,68 @@ namespace Ulearn_game
             {
                 Point = new Point(Point.X - Speed, Point.Y);
                 Point = new Point(Point.X, Point.Y - Speed);
+                if (IsWall())
+                {
+                    Point = new Point(Point.X + Speed, Point.Y);
+                    Point = new Point(Point.X, Point.Y + Speed);
+                }
+
             }
             else if (Game.Player.Point.X < Point.X && Game.Player.Point.Y > Point.Y)
             {
                 Point = new Point(Point.X - Speed, Point.Y);
                 Point = new Point(Point.X, Point.Y + Speed);
+                if (IsWall())
+                {
+                    Point = new Point(Point.X + Speed, Point.Y);
+                    Point = new Point(Point.X, Point.Y - Speed);
+                }
             }
             else if (Game.Player.Point.X > Point.X && Game.Player.Point.Y < Point.Y)
             {
                 Point = new Point(Point.X + Speed, Point.Y);
                 Point = new Point(Point.X, Point.Y - Speed);
+                if (IsWall())
+                {
+                    Point = new Point(Point.X - Speed, Point.Y);
+                    Point = new Point(Point.X, Point.Y + Speed);
+                }
             }
             else if (Game.Player.Point.X > Point.X && Game.Player.Point.Y > Point.Y)
             {
                 Point = new Point(Point.X + Speed, Point.Y);
                 Point = new Point(Point.X, Point.Y + Speed);
+                if (IsWall())
+                {
+                    Point = new Point(Point.X - Speed, Point.Y);
+                    Point = new Point(Point.X, Point.Y - Speed);
+                }
             }
             else if (Game.Player.Point.X < Point.X && Game.Player.Point.Y == Point.Y)
             {
                 Point = new Point(Point.X - Speed, Point.Y);
+                if(IsWall())
+                    Point = new Point(Point.X + Speed, Point.Y);
             }
             else if (Game.Player.Point.X > Point.X && Game.Player.Point.Y == Point.Y)
             {
                 Point = new Point(Point.X + Speed, Point.Y);
+                if(IsWall())
+                    Point = new Point(Point.X + Speed, Point.Y);
             }
             else if (Game.Player.Point.Y > Point.Y && Game.Player.Point.X == Point.X)
             {
                 Point = new Point(Point.X, Point.Y + Speed);
+                if(IsWall())
+                    Point = new Point(Point.X, Point.Y - Speed);
             }
             else if (Game.Player.Point.Y < Point.Y && Game.Player.Point.X == Point.X)
             {
                 Point = new Point(Point.X, Point.Y - Speed);
+                if(IsWall())
+                    Point = new Point(Point.X, Point.Y + Speed);
             }
         }
+
     }
 }

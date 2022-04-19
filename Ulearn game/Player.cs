@@ -82,16 +82,19 @@ namespace Ulearn_game
 
         public bool IsWall()
         {
-            var x = (Point.X + Width/2) / 100;
-            var y = (Point.Y + Height/2) / 100;
-            Debug.WriteLine(x);
-            Debug.WriteLine(y);
+            var x = (Point.X + Width / 2) / 100;
+            var y = (Point.Y + Height / 2) / 100;
             if (Game.Level[x, y] == 2)
                 return true;
             return false;
-
         }
 
+        public Point GetFastestPath()
+        {
+
+
+            throw new NotImplementedException();
+        }
 
         public void Move()
         {

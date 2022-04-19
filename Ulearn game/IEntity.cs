@@ -26,5 +26,7 @@ namespace Ulearn_game
         void Move();
         void PlayAnimation();
 
+        bool IsWall();
+
     }
 }
