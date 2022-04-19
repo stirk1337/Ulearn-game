@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,7 @@ namespace Ulearn_game
             Down = false;
             Left = false;
             Right = false;
-            Point = new Point(150, 600);
+            Point = new Point(200, 500);
             Angle = 0;
             Speed = 10;
             Weapon = "punch1";
@@ -76,14 +77,51 @@ namespace Ulearn_game
                 new Bitmap(Properties.Resources.jacket_dead_3, Width, Height),
                 new Bitmap(Properties.Resources.jacket_dead_3, Width, Height),
             };
+            
+        }
+
+        public bool IsWall()
+        {
+            var x = (Point.X + Width/2) / 100;
+            var y = (Point.Y + Height/2) / 100;
+            Debug.WriteLine(x);
+            Debug.WriteLine(y);
+            if (Game.Level[x, y] == 2)
+                return true;
+            return false;
 
         }
+
+
         public void Move()
         {
-            if (Right) { Point = new Point(Point.X + Speed, Point.Y); }
-            if (Left) { Point = new Point(Point.X - Speed, Point.Y); }
-            if (Up) { Point = new Point(Point.X, Point.Y - Speed); } 
-            if (Down) { Point = new Point(Point.X, Point.Y + Speed); }
+            if (Right)
+            {
+                Point = new Point(Point.X + Speed, Point.Y);
+                if (IsWall())
+                    Point = new Point(Point.X - Speed, Point.Y);
+            }
+
+            if (Left)
+            {
+                Point = new Point(Point.X - Speed, Point.Y);
+                if (IsWall())
+                    Point = new Point(Point.X + Speed, Point.Y);
+            }
+
+            if (Up)
+            {
+                Point = new Point(Point.X, Point.Y - Speed);
+                if (IsWall())
+                    Point = new Point(Point.X, Point.Y + Speed);
+            }
+
+            if (Down)
+            {
+                Point = new Point(Point.X, Point.Y + Speed);
+                if (IsWall())
+                    Point = new Point(Point.X, Point.Y - Speed);
+            }
         }
 
         public void RotatePlayer(Graphics g, float angle)

@@ -15,7 +15,7 @@ namespace Ulearn_game
         public static Player Player;
         public static Bandit[] Bandits;
         Timer mainTimer = new Timer();
-        public static int Level;
+        public static int[,] Level;
         public Game()
         {
             InitializeComponent();
@@ -25,7 +25,26 @@ namespace Ulearn_game
             {
                 
             };
-            Level = 1;
+            Level = new int[,]
+            {
+                {2, 2, 2, 2, 2, 2, 2, 2, 2},
+                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 1, 2, 2, 2, 2, 2, 2, 2},
+                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 2, 2, 2, 2, 2, 1, 1, 2},
+                {2, 1, 1, 1, 1, 2, 1, 1, 2},
+                {2, 1, 1, 1, 1, 2, 1, 1, 2},
+                {2, 1, 1, 1, 1, 2, 1, 1, 2},
+                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 1, 1, 1, 1, 2, 1, 1, 2},
+                {2, 1, 1, 1, 1, 2, 1, 1, 2},
+                {2, 1, 1, 1, 1, 2, 1, 1, 2},
+                {2, 2, 2, 2, 2, 2, 1, 1, 2},
+            };
 
             DoubleBuffered = true;
             mainTimer.Interval = 20;
@@ -61,43 +80,17 @@ namespace Ulearn_game
 
         public void CreateMap(Graphics g)
         {
-            if (Level == 1)
+            for (int i = 0; i < Level.GetLength(0); i++)
             {
-                var Level = new int[,]
+                for (int j = 0; j < Level.GetLength(1); j++)
                 {
-                    {2,2,2,2,2,2,2,2,2},
-                    {2,1,1,1,1,1,1,1,2},
-                    {2,1,1,1,1,1,1,1,2},
-                    {2,1,2,2,2,2,2,2,2},
-                    {2,1,1,1,1,1,1,1,2},
-                    {2,1,1,1,1,1,1,1,2},
-                    {2,1,1,1,1,1,1,1,2},
-                    {2,2,2,2,2,2,1,1,2},
-                    {2,1,1,1,1,2,1,1,2},
-                    {2,1,1,1,1,2,1,1,2},
-                    {2,1,1,1,1,2,1,1,2},
-                    {2,1,1,1,1,1,1,1,2},
-                    {2,1,1,1,1,1,1,1,2},
-                    {2,1,1,1,1,2,1,1,2},
-                    {2,1,1,1,1,2,1,1,2},
-                    {2,1,1,1,1,2,1,1,2},
-                    {2,2,2,2,2,2,1,1,2},
-                };
-                for (int i = 0; i < Level.GetLength(0); i++)
-                {
-                    for (int j = 0; j < Level.GetLength(1); j++)
-                    {
-                        if(Level[i,j] == 1)
-                            g.DrawImage(Properties.Resources.brick2, i * 100, j * 100);
-                        else if(Level[i,j] == 2)
-                            g.DrawImage(Properties.Resources.brick1, i * 100, j * 100);
-                    }
+                    if (Level[i, j] == 1)
+                        g.DrawImage(Properties.Resources.brick2, i * 100, j * 100);
+                    else if (Level[i, j] == 2)
+                        g.DrawImage(Properties.Resources.brick1, i * 100, j * 100);
                 }
-
             }
         }
-
-
         public void GameKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.D) { Player.Right = true; }
