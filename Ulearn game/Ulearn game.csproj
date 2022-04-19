@@ -194,5 +194,17 @@
   <ItemGroup>
     <None Include="src\jacket\jacket_dead_2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\texture\floor_brick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\texture\brick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\texture\brick2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\texture\floor_blue.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

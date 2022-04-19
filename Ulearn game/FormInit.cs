@@ -15,6 +15,7 @@ namespace Ulearn_game
         public static Player Player;
         public static Bandit[] Bandits;
         Timer mainTimer = new Timer();
+        public static int Level;
         public Game()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace Ulearn_game
                 new Bandit(new Point(1000 ,500)),
                 new Bandit(new Point(500, 600)),
             };
+            Level = 1;
 
             DoubleBuffered = true;
             mainTimer.Interval = 20;
@@ -45,6 +47,7 @@ namespace Ulearn_game
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
+            CreateMap(g);
             foreach (var bandit in Bandits)
             {
                 if (!bandit.IsDead) { bandit.Alive(g); }
@@ -56,7 +59,46 @@ namespace Ulearn_game
                 Player.Dead(g); 
                 mainTimer.Stop();
             }
-        }   
+        }
+
+        public void CreateMap(Graphics g)
+        {
+            if (Level == 1)
+            {
+                var Level = new int[,]
+                {
+                    {1,1,1,1,1,1,2,2,2},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                    {1,1,1,1,1,1,1,1,1},
+                };
+                for (int i = 0; i < Level.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Level.GetLength(1); j++)
+                    {
+                        if(Level[i,j] == 1)
+                            g.DrawImage(Properties.Resources.brick2, i * 100, j * 100);
+                        else if(Level[i,j] == 2)
+                            g.DrawImage(Properties.Resources.brick, i * 100, j * 100);
+                    }
+                }
+
+            }
+        }
+
 
         public void GameKeyDown(object sender, KeyEventArgs e)
         {

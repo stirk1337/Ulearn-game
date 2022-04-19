@@ -139,6 +139,18 @@
   <data name="bita_idle2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\player\bita\bita_idle2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="brick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\texture\brick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="brick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\texture\brick2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="floor_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\texture\floor_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="floor_brick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\texture\floor_brick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="jacket_dead_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\jacket\jacket_dead_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
