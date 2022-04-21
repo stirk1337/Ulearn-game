@@ -33,6 +33,9 @@ namespace Ulearn_game
         public Point KillerPoint { get; set; }
         public int KillerHeight { get; set; }
         public int KillerWidth { get; set; }
+        public Point MovePoint { get; set; }
+        public bool IsMoving { get; set; }
+
         public Player()
         {
             Width = 160;
