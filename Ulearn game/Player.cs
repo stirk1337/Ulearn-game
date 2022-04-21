@@ -33,7 +33,6 @@ namespace Ulearn_game
         public Point KillerPoint { get; set; }
         public int KillerHeight { get; set; }
         public int KillerWidth { get; set; }
-
         public Player()
         {
             Width = 160;
@@ -88,14 +87,7 @@ namespace Ulearn_game
                 return true;
             return false;
         }
-
-        public Point GetFastestPath()
-        {
-
-
-            throw new NotImplementedException();
-        }
-
+        
         public void Move()
         {
             if (Right)
@@ -244,6 +236,11 @@ namespace Ulearn_game
             }
 
             OnPaint(g);
+        }
+
+        public Point GetFastestPath()
+        {
+            throw new NotImplementedException();
         }
     }
 }

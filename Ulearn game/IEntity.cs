@@ -25,7 +25,7 @@ namespace Ulearn_game
         void Dead(Graphics g);
         void Move();
         void PlayAnimation();
-
+        Point GetFastestPath();
         bool IsWall();
 
     }
