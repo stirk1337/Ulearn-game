@@ -24,8 +24,6 @@ namespace Ulearn_game
         void Alive(Graphics g);
         void Dead(Graphics g);
         void Move();
-        Point MovePoint { get; set; }
-        bool IsMoving { get; set; }
         void PlayAnimation();
         Point GetFastestPath();
         bool IsWall();

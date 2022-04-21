@@ -22,8 +22,6 @@ namespace Ulearn_game
         public int Speed { get; set; }
         public bool IsDead { get; set; }
         public float DeadAngle { get; set; }
-        public bool IsMoving { get; set; }
-        public Point MovePoint { get; set; }
 
         public Bandit(Point point)
         {
@@ -35,8 +33,6 @@ namespace Ulearn_game
             Speed = 5;
             IsDead = false;
             DeadAngle = -1;
-            IsMoving = false;
-            MovePoint = new Point(point.X, point.Y);
         }
 
         public void PlayAnimation()
@@ -165,35 +161,28 @@ namespace Ulearn_game
 
         public void Move()
         {
-            if (Point.X == MovePoint.X && Point.Y == MovePoint.Y)
-                IsMoving = false;
-            if (!IsMoving)
-            {
-                MovePoint = GetFastestPath();
-                IsMoving = true;
-            }
-
-            Debug.WriteLine(MovePoint);
-            if (MovePoint.X < Point.X)
+            var moveTo = GetFastestPath();
+            Debug.WriteLine(moveTo);
+            if (moveTo.X < Point.X)
             {
                 Point = new Point(Point.X - Speed, Point.Y);
                 if(IsWall())
                     Point = new Point(Point.X + Speed, Point.Y);
             }
-            else if (MovePoint.X > Point.X)
+            else if (moveTo.X > Point.X)
             {
                 Point = new Point(Point.X + Speed, Point.Y);
                 if(IsWall())
                     Point = new Point(Point.X - Speed, Point.Y);
             }
 
-            if (MovePoint.Y < Point.Y)
+            if (moveTo.Y < Point.Y)
             {
                 Point = new Point(Point.X, Point.Y - Speed);
                 if(IsWall())
                     Point = new Point(Point.X, Point.Y + Speed);
             }
-            else if (MovePoint.Y > Point.Y)
+            else if (moveTo.Y > Point.Y)
             {
                 Point = new Point(Point.X, Point.Y + Speed);
                 if(IsWall())
