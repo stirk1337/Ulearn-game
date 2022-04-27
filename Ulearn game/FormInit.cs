@@ -24,7 +24,12 @@ namespace Ulearn_game
             Bandits = new Bandit[]
             {
                 new Bandit(new Point(550,550), new Point(3,1)),
-                new Bandit(new Point(1550, 650), new Point(3,1)),    
+                new Bandit(new Point(1550, 650), new Point(7,6)), 
+                new Bandit(new Point(850, 150), new Point(11,5)),
+                new Bandit(new Point(1450, 150), new Point(11,6)),
+                new Bandit(new Point(850, 350), new Point(11, 5)),
+                new Bandit(new Point(1450, 350), new Point(11,5)),
+                
             };
             Level = new int[,]
             {
@@ -35,12 +40,12 @@ namespace Ulearn_game
                 {2, 1, 1, 1, 1, 1, 1, 1, 2},
                 {2, 1, 1, 1, 1, 1, 1, 1, 2},
                 {2, 1, 1, 1, 1, 1, 1, 1, 2},
-                {2, 2, 2, 2, 2, 2, 1, 1, 2},
+                {2, 2, 2, 2, 2, 2, 1, 2, 2},
                 {2, 1, 1, 1, 1, 2, 1, 1, 2},
                 {2, 1, 1, 1, 1, 2, 1, 1, 2},
                 {2, 1, 1, 1, 1, 2, 1, 1, 2},
                 {2, 1, 1, 1, 1, 1, 1, 1, 2},
-                {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                {2, 1, 1, 1, 1, 2, 1, 1, 2},
                 {2, 1, 1, 1, 1, 2, 1, 1, 2},
                 {2, 1, 1, 1, 1, 2, 1, 1, 2},
                 {2, 1, 1, 1, 1, 2, 1, 1, 2},
