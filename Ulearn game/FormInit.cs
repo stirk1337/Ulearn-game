@@ -23,7 +23,7 @@ namespace Ulearn_game
             Player = new Player();
             Bandits = new Bandit[]
             {
-                new Bandit(new Point(550,550))
+                new Bandit(new Point(550,550), new Point(3,1))
             };
             Level = new int[,]
             {

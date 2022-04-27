@@ -12,58 +12,19 @@ using System.Windows.Forms;
 
 namespace Ulearn_game
 {
-    public class Bandit : IEntity
+
+    public class Entity
     {
-        public Bitmap Sprite { get; set; }
-        public string Weapon { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public Point Point { get; set; }
-        public int Speed { get; set; }
-        public bool IsDead { get; set; }
-        public float DeadAngle { get; set; }
-
-        public Bandit(Point point)
-        {
-            Sprite = Properties.Resources.bandit;
-            Width = 80;
-            Height = 80;
-            Point = new Point(point.X, point.Y);
-            Weapon = "fist";
-            Speed = 5;
-            IsDead = false;
-            DeadAngle = -1;
-        }
-
-        public void PlayAnimation()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Alive(Graphics g)
-        {
-            Move();
-            OnPaint(g);
-            IsGettingMeleeDamage();
-        }
-
-        public void Dead(Graphics g)
-        {
-            Sprite = Properties.Resources.bandit_dead;
-            Height = 150;
-            Width = 150;
-            Speed = 0;
-            if(DeadAngle == -1)
-                    DeadAngle = GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
-            OnPaint(g);
-        }
-
-        public float GetAngleToTarget(Point playerPoint, int playerWidth, int playerHeight, string target)
-        {
-            var y = target == "player" ? playerPoint.Y + playerHeight / 2f - Point.Y - Height / 2f : Point.Y + Height / 2f - playerPoint.Y - playerHeight / 2f;
-            var x = target == "player" ? playerPoint.X + playerWidth / 2f - Point.X - Width / 2f : Point.X + Width / 2f - playerPoint.X - playerWidth / 2f;
-            return (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
-        }
+        public Bitmap Sprite;
+        public string Weapon;
+        public int Width;
+        public int Height;
+        public Point Point;
+        public int Speed;
+        public bool IsDead;
+        public float DeadAngle;
+        public bool IsMoving;
+        public Point AgroPoint;
 
         public void Rotate(Graphics g, float angle)
         {
@@ -78,25 +39,6 @@ namespace Ulearn_game
             g.DrawImage(rotated, Point.X, Point.Y, Width, Height);
         }
 
-        public void OnPaint(Graphics g)
-        {
-            var angle = IsDead
-                ? DeadAngle
-                : GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "player");
-            Rotate(g, angle);
-        }
-        public void IsGettingMeleeDamage()
-        {
-            Point player = new Point(Game.Player.Point.X + Game.Player.Width / 2, Game.Player.Point.Y + Game.Player.Height / 2);
-            Point bandit = new Point(Point.X + Width / 2, Point.Y + Height / 2);
-            var distance = Math.Sqrt(Math.Pow(bandit.X - player.X, 2) + Math.Pow(bandit.Y - player.Y, 2));
-            float angleFromPlayer =
-                GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
-            var range = Game.Player.Angle < angleFromPlayer ? angleFromPlayer - Game.Player.Angle : Game.Player.Angle - angleFromPlayer;
-            if (Game.Player.IsAttacking && distance < 90 && Math.Abs(range) < 50)
-                IsDead = true;
-        }
-            
         public bool IsWall()
         {
             var x = (Point.X + Width / 2) / 100;
@@ -108,8 +50,8 @@ namespace Ulearn_game
 
         public Point GetFastestPath()
         {
-            var dx = new int[] {0, 1, 0, -1, 1, 1, -1, -1};
-            var dy = new int[] {1, 0, -1, 0, 1, -1, -1, 1};
+            var dx = new int[] { 0, 1, 0, -1, 1, 1, -1, -1 };
+            var dy = new int[] { 1, 0, -1, 0, 1, -1, -1, 1 };
             var used = new bool[100, 100];
             var start = new Point((Point.X + Width / 2) / 100, (Point.Y + Height / 2) / 100);
             var end = new Point((Game.Player.Point.X + Game.Player.Width / 2) / 100,
@@ -117,8 +59,8 @@ namespace Ulearn_game
             var q = new Queue<Point>();
             var path = new List<Point>[100, 100];
             for (int i = 0; i < path.GetLength(0); i++)
-            for (int j = 0; j < path.GetLength(1); j++)
-                path[i, j] = new List<Point>();
+                for (int j = 0; j < path.GetLength(1); j++)
+                    path[i, j] = new List<Point>();
             q.Enqueue(start);
             used[start.X, start.Y] = true;
             while (q.Count != 0)
@@ -141,55 +83,146 @@ namespace Ulearn_game
                 }
             }
 
-            //Debug.WriteLine(path[end.X, end.Y][1]);
             try
             {
-                Debug.WriteLine(path[end.X, end.Y][1]);
                 path[end.X, end.Y][1] = new Point(path[end.X, end.Y][1].X * 100 + 50, path[end.X, end.Y][1].Y * 100 + 50);
                 return path[end.X, end.Y][1];
-                
+
             }
             catch
             {
-                Debug.WriteLine(new Point((Game.Player.Point.X + Game.Player.Width / 2),
-                    (Game.Player.Point.Y + Game.Player.Height / 2)));
+
                 return new Point((Game.Player.Point.X + Game.Player.Width / 2),
                     (Game.Player.Point.Y + Game.Player.Height / 2));
             }
 
         }
 
+        public float GetAngleToTarget(Point playerPoint, int playerWidth, int playerHeight, string target)
+        {
+            var y = 0.0;
+            var x = 0.0;
+            if (target == "player")
+            {
+                y = playerPoint.Y + playerHeight / 2f - Point.Y - Height / 2f;
+                x = playerPoint.X + playerWidth / 2f - Point.X - Width / 2f;
+
+            }
+            else if (target == "bandit")
+            {
+                y = Point.Y + Height / 2f - playerPoint.Y - playerHeight / 2f;
+                x = Point.X + Width / 2f - playerPoint.X - playerWidth / 2f;
+            }
+            else if (target == "block")
+            {
+                var block = GetFastestPath();
+                y = block.Y + 50 - Point.Y - Height / 2f;
+                x = block.X + 50 - Point.X - Width / 2f;
+            }
+
+            return (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
+        }
+
+        public void IsGettingMeleeDamage()
+        {
+            Point player = new Point(Game.Player.Point.X + Game.Player.Width / 2, Game.Player.Point.Y + Game.Player.Height / 2);
+            Point bandit = new Point(Point.X + Width / 2, Point.Y + Height / 2);
+            var distance = Math.Sqrt(Math.Pow(bandit.X - player.X, 2) + Math.Pow(bandit.Y - player.Y, 2));
+            float angleFromPlayer =
+                GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
+            var range = Game.Player.Angle < angleFromPlayer ? angleFromPlayer - Game.Player.Angle : Game.Player.Angle - angleFromPlayer;
+            if (Game.Player.IsAttacking && distance < 90 && Math.Abs(range) < 50)
+                IsDead = true;
+        }
+
+        public void IsPlayerNear()
+        {
+            if((Game.Player.Point.X + Game.Player.Width / 2) / 100 == AgroPoint.X && (Game.Player.Point.Y + Game.Player.Height / 2) / 100 == AgroPoint.Y)
+                IsMoving = true;
+        }
+
+
         public void Move()
         {
+            if (!IsMoving)
+                return;
             var moveTo = GetFastestPath();
             Debug.WriteLine(moveTo);
             if (moveTo.X < Point.X)
             {
                 Point = new Point(Point.X - Speed, Point.Y);
-                if(IsWall())
+                if (IsWall())
                     Point = new Point(Point.X + Speed, Point.Y);
             }
             else if (moveTo.X > Point.X)
             {
                 Point = new Point(Point.X + Speed, Point.Y);
-                if(IsWall())
+                if (IsWall())
                     Point = new Point(Point.X - Speed, Point.Y);
             }
 
             if (moveTo.Y < Point.Y)
             {
                 Point = new Point(Point.X, Point.Y - Speed);
-                if(IsWall())
+                if (IsWall())
                     Point = new Point(Point.X, Point.Y + Speed);
             }
             else if (moveTo.Y > Point.Y)
             {
                 Point = new Point(Point.X, Point.Y + Speed);
-                if(IsWall())
+                if (IsWall())
                     Point = new Point(Point.X, Point.Y - Speed);
             }
 
 
+        }
+
+    }
+
+
+
+
+    public class Bandit : Entity
+    {
+        public Bandit(Point point, Point agroPoint)
+        {
+            Sprite = Properties.Resources.bandit;
+            Width = 80;
+            Height = 80;
+            Point = new Point(point.X, point.Y);
+            Weapon = "fist";
+            Speed = 5;
+            IsDead = false;
+            DeadAngle = -1;
+            IsMoving = false;
+            AgroPoint = new Point(agroPoint.X, agroPoint.Y);
+        }
+
+        public void Alive(Graphics g)
+        {
+            Move();
+            OnPaint(g);
+            IsGettingMeleeDamage();
+            IsPlayerNear();
+        }
+
+        public void Dead(Graphics g)
+        {
+            Sprite = Properties.Resources.bandit_dead;
+            Height = 150;
+            Width = 150;
+            Speed = 0;
+            if(DeadAngle == -1)
+                    DeadAngle = GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
+            OnPaint(g);
+        }
+
+        public void OnPaint(Graphics g)
+        {
+            var angle = IsDead
+                ? DeadAngle
+                : GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "player");
+            Rotate(g, angle);   
         }
 
     }

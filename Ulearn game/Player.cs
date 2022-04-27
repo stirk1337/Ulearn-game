@@ -12,24 +12,16 @@ using Ulearn_game.Properties;
 
 namespace Ulearn_game
 {
-    public class Player: IEntity
+    public class Player: Entity
     {
         public bool Up, Down, Left, Right;
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public Bitmap Sprite { get; set; }
         public float Angle { get; set; }
         public Point Mouse { get; set; }
-        public Point Point { get; set; }
         public bool IsAttacking { get; set; } 
         public int CurrentFrame { get; set; }
         public Bitmap[] Punch1;
         public Bitmap[] Punch2;
         public Bitmap[] DeadSprites;
-        public int Speed { get; set; }
-        public string Weapon { get; set; }
-        public bool IsDead { get; set; }
-        public float DeadAngle { get; set; }
         public Point KillerPoint { get; set; }
         public int KillerHeight { get; set; }
         public int KillerWidth { get; set; }
@@ -80,15 +72,6 @@ namespace Ulearn_game
             
         }
 
-        public bool IsWall()
-        {
-            var x = (Point.X + Width / 2) / 100;
-            var y = (Point.Y + Height / 2) / 100;
-            if (Game.Level[x, y] == 2)
-                return true;
-            return false;
-        }
-        
         public void Move()
         {
             if (Right)
@@ -118,19 +101,6 @@ namespace Ulearn_game
                 if (IsWall())
                     Point = new Point(Point.X, Point.Y - Speed);
             }
-        }
-
-        public void RotatePlayer(Graphics g, float angle)
-        {
-            var rotated = new Bitmap(Width, Height);
-            using (Graphics fromImage = Graphics.FromImage(rotated))
-            {
-                fromImage.TranslateTransform(Width / 2f, Height / 2f);
-                fromImage.RotateTransform(angle);
-                fromImage.TranslateTransform(-(Width / 2f), -(Height / 2f));
-                fromImage.DrawImage(Sprite, 0,0, Width, Height);
-            }
-            g.DrawImage(rotated, Point.X, Point.Y, Width, Height);
         }
 
         public void PlayAnimation()
@@ -173,7 +143,7 @@ namespace Ulearn_game
         {
             UpdateAngle(null, null);
             var angle = IsDead ? GetAngleToTarget(KillerPoint, KillerWidth, KillerHeight, "")+180 : Angle;
-            RotatePlayer(g, angle);
+            Rotate(g, angle);
         }
 
         public void UpdateAngle(object sender, MouseEventArgs e)
@@ -192,13 +162,6 @@ namespace Ulearn_game
         public void Attack(object sender, MouseEventArgs e)
         {
             IsAttacking = true;
-        }
-
-        public float GetAngleToTarget(Point targetPoint, int targetWidth, int targetHeight, string target)
-        {
-            var y = targetPoint.Y + targetHeight / 2f - Point.Y - Height / 2f;
-            var x = targetPoint.X + targetHeight / 2f - Point.X - Width / 2f;
-            return (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
         }
 
         public void IsGettingMeleeDamage()
@@ -229,7 +192,7 @@ namespace Ulearn_game
         public void Dead(Graphics g)
         {
             var rnd = new Random();
-            var random = rnd.Next(0, Game.Bandits.Length);
+            var random = rnd.Next(0, DeadSprites.Length);
             if (Speed != 0)
             {
                 Sprite = DeadSprites[random];
@@ -237,11 +200,6 @@ namespace Ulearn_game
             }
 
             OnPaint(g);
-        }
-
-        public Point GetFastestPath()
-        {
-            throw new NotImplementedException();
         }
     }
 }
