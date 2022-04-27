@@ -24,6 +24,7 @@ namespace Ulearn_game
         public bool IsDead;
         public float DeadAngle;
         public bool IsMoving;
+        public int Spawned;
         public Point AgroPoint;
 
         public void Rotate(Graphics g, float angle)
@@ -100,6 +101,19 @@ namespace Ulearn_game
 
         public float GetAngleToTarget(Point playerPoint, int playerWidth, int playerHeight, string target)
         {
+            if (Spawned == 0)
+            {
+                var spawnAngles = new int[]
+                {
+                    0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360,
+                };
+                Spawned = spawnAngles[(Point.X + Point.Y) % spawnAngles.Length];
+                return Spawned;
+            }
+
+            if (!IsMoving)
+                return Spawned;
+
             var y = 0.0;
             var x = 0.0;
             if (target == "player")
@@ -196,6 +210,7 @@ namespace Ulearn_game
             DeadAngle = -1;
             IsMoving = false;
             AgroPoint = new Point(agroPoint.X, agroPoint.Y);
+            Spawned = 0;
         }
 
         public void Alive(Graphics g)
