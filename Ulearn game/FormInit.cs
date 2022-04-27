@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -80,8 +81,32 @@ namespace Ulearn_game
             else
             {
                 Player.Dead(g); 
+                PlaySound("kill");
                 mainTimer.Stop();
             }
+        }
+
+        public static void PlaySound(string sound)
+        {
+            SoundPlayer simpleSound = new SoundPlayer();
+            if (sound == "kill")
+            {
+                new System.Threading.Thread(() =>
+                {
+                    simpleSound = new SoundPlayer(Properties.Resources.kill); 
+                    simpleSound.Play();
+                }).Start();
+            }
+
+            if (sound == "punch")
+            {
+                new System.Threading.Thread(() =>
+                {
+                    simpleSound = new SoundPlayer(Properties.Resources.punch);
+                    simpleSound.Play();
+                }).Start();
+            }
+
         }
 
         public void CreateMap(Graphics g)

@@ -227,8 +227,11 @@ namespace Ulearn_game
             Height = 150;
             Width = 150;
             Speed = 0;
-            if(DeadAngle == -1)
-                    DeadAngle = GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
+            if (DeadAngle == -1)
+            {
+                DeadAngle = GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
+            }
+
             OnPaint(g);
         }
 

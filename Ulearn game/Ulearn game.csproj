@@ -209,5 +209,11 @@
   <ItemGroup>
     <None Include="src\texture\brick.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\sound\punch.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\sound\kill.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

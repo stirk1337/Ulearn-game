@@ -105,6 +105,8 @@ namespace Ulearn_game
 
         public void PlayAnimation()
         {
+            if(CurrentFrame == 1 && (Weapon == "punch1" || Weapon == "punch2"))
+                Game.PlaySound("punch");
             if (Weapon == "punch1" && IsAttacking && CurrentFrame < Punch1.Length)
             {
                 Sprite = Punch1[CurrentFrame];
