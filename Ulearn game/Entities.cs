@@ -44,8 +44,15 @@ namespace Ulearn_game
         {
             var x = (Point.X + Width / 2) / 100;
             var y = (Point.Y + Height / 2) / 100;
-            if (Game.Level[x, y] == 2)
-                return true;
+            try
+            {
+                if (Game.Level[x, y] == 2 || Game.Level[x,y] == 4)
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
             return false;
         }
 
@@ -146,7 +153,10 @@ namespace Ulearn_game
                 GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
             var range = Game.Player.Angle < angleFromPlayer ? angleFromPlayer - Game.Player.Angle : Game.Player.Angle - angleFromPlayer;
             if (Game.Player.IsAttacking && distance < 90 && Math.Abs(range) < 50)
+            {
                 IsDead = true;
+                Game.Kills++;
+            }
         }
 
         public void IsPlayerNear()
