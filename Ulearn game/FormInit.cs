@@ -79,9 +79,9 @@ namespace Ulearn_game
         {
             var g = e.Graphics;
             CreateMap(g);
-            foreach (var bullet in Bullets)
+            for(int i = Bullets.Count - 1; i >= 0; i--)
             {
-               bullet.OnPaint(g);
+               Bullets[i].OnPaint(g, i);
             }
             foreach (var bandit in Bandits)
             {

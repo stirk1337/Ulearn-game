@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -33,28 +34,42 @@ namespace Ulearn_game
             Width = Sprite.Height;
             Height = Sprite.Width;
             Destination = new Point(destX, destY);
-            Speed = 10;
+            Speed = 50;
             Calculated = false;
-            Point = new PointF(playerPoint.X, playerPoint.Y); // need some delta
+            Point = new PointF(playerPoint.X + deltaWidth, playerPoint.Y + deltaHeight);
         }
 
-        public void OnPaint(Graphics g)
+        public void OnPaint(Graphics g, int index)
         {
             if(!Calculated)
                 CalculateDestination();
-            Move();
-            g.DrawImage(Sprite, Point.X, Point.Y);
+            Rotate(g, Angle);
+            Move(index);
+            //g.DrawImage(Sprite, Point.X, Point.Y);
         }
 
-        public void Move()
+        public void Move(int index)
         {
             Point.X += SpeedX;
             Point.Y -= SpeedY;
             if (IsWall())
             {
-                //throw new NotImplementedException(); // if bullet touch wall throw this
+                Game.Bullets.RemoveAt(index);
             }
         }
+        public void Rotate(Graphics g, float angle)
+        {
+            var rotated = new Bitmap(Width, Height);
+            using (Graphics fromImage = Graphics.FromImage(rotated))
+            {
+                fromImage.TranslateTransform(Width / 2f, Height / 2f);
+                fromImage.RotateTransform(angle);
+                fromImage.TranslateTransform(-(Width / 2f), -(Height / 2f));
+                fromImage.DrawImage(Sprite, 0, 0, Width, Height);
+            }
+            g.DrawImage(rotated, Point.X, Point.Y, Width, Height);
+        }
+
 
         public bool IsWall()
         {
@@ -75,16 +90,11 @@ namespace Ulearn_game
         public void CalculateDestination()
         {
             Calculated = true;
-            var x = Math.Abs(Destination.X - Point.X);
-            var y = Math.Abs(Destination.Y - Point.Y);
-            if (x > y)
-            {
-                
-            }
-            else
-            {
-                
-            }
+            var x = Destination.X - Point.X;
+            var y = Destination.Y - Point.Y;
+            SpeedX = x > 0 ? Speed : -Speed;
+            SpeedY = y > 0 ? Math.Abs((y / x)) * -Speed : Math.Abs((y / x)) * Speed;
+            Debug.WriteLine(SpeedY);
         }
 
     }
