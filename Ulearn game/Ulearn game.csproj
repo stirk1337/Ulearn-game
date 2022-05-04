@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bullet.cs" />
     <Compile Include="Entities.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Player.cs" />
@@ -220,6 +221,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\texture\brick_old.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\jacket\jacket_pistol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\texture\bullet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

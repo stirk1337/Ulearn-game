@@ -139,6 +139,17 @@ namespace Ulearn_game
                 IsAttacking = false;
                 Sprite = new Bitmap(Properties.Resources.jacket_idle, Width, Height);
             }
+            else if (Weapon == "pistol")
+            {
+                Sprite = new Bitmap(Properties.Resources.jacket_pistol, Width, Height);
+                IsAttacking = false;
+                CurrentFrame = 0;
+            }
+            else
+            {
+                CurrentFrame = 0;
+                IsAttacking = false;
+            }
         }
 
         public void OnPaint(Graphics g)
@@ -163,7 +174,12 @@ namespace Ulearn_game
 
         public void Attack(object sender, MouseEventArgs e)
         {
-            IsAttacking = true;
+            if(Weapon == "punch1" || Weapon == "punch2")
+                IsAttacking = true;
+            else
+            {
+                Game.Bullets.Add(new Bullet(Angle, 0, 0, Mouse.X, Mouse.Y, Point));
+            }
         }
 
         public void IsGettingMeleeDamage()

@@ -15,6 +15,7 @@ namespace Ulearn_game
     {
         public static Player Player;
         public static Bandit[] Bandits;
+        public static List<Bullet> Bullets;
         Timer mainTimer = new Timer();
         public static int[,] Level;
         public static int Kills;
@@ -24,6 +25,7 @@ namespace Ulearn_game
             InitializeComponent();
 
             Player = new Player();
+            Bullets = new List<Bullet>();
             Kills = 0;
             LevelNumber = 1;
             Bandits = new Bandit[]
@@ -63,6 +65,7 @@ namespace Ulearn_game
             KeyUp += GameKeyUp;
             MouseMove += Player.UpdateAngle;
             MouseClick += Player.Attack;
+            KeyUp += GameKeyChangeWeapon;
             mainTimer.Tick += MainLoop;
             mainTimer.Start();
         }
@@ -76,6 +79,10 @@ namespace Ulearn_game
         {
             var g = e.Graphics;
             CreateMap(g);
+            foreach (var bullet in Bullets)
+            {
+               bullet.OnPaint(g);
+            }
             foreach (var bandit in Bandits)
             {
                 if (!bandit.IsDead)
@@ -196,6 +203,19 @@ namespace Ulearn_game
             if (e.KeyCode == Keys.A) { Player.Left = false; }
             if (e.KeyCode == Keys.W) { Player.Up = false; }
             if (e.KeyCode == Keys.S) { Player.Down = false; }
+        }
+
+        public void GameKeyChangeWeapon(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Q)
+            {
+                if (Player.Weapon == "punch1" || Player.Weapon == "punch2")
+                    Player.Weapon = "pistol";
+                else if (Player.Weapon == "pistol")
+                {
+                    Player.Weapon = "punch1";
+                }
+            }
         }
     }
 

@@ -183,6 +183,16 @@ namespace Ulearn_game.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bullet {
+            get {
+                object obj = ResourceManager.GetObject("bullet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap floor_blue {
             get {
                 object obj = ResourceManager.GetObject("floor_blue", resourceCulture);
@@ -246,6 +256,16 @@ namespace Ulearn_game.Properties {
         internal static System.Drawing.Bitmap jacket_idle {
             get {
                 object obj = ResourceManager.GetObject("jacket_idle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap jacket_pistol {
+            get {
+                object obj = ResourceManager.GetObject("jacket_pistol", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
