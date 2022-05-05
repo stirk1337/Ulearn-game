@@ -154,8 +154,25 @@ namespace Ulearn_game
             var range = Game.Player.Angle < angleFromPlayer ? angleFromPlayer - Game.Player.Angle : Game.Player.Angle - angleFromPlayer;
             if (Game.Player.IsAttacking && distance < 90 && Math.Abs(range) < 50)
             {
+                Game.PlaySound("kill");
                 IsDead = true;
                 Game.Kills++;
+            }
+        }
+
+        public void IsGettingRangeDamage()
+        {
+            foreach (var bullet in Game.Bullets)
+            {
+                var bulletPoint = new PointF(bullet.Point.X + bullet.Width / 2, bullet.Point.Y + bullet.Height / 2);
+                var banditPoint = new PointF(Point.X + Width / 2, Point.Y + Height / 2);
+                var distance = Math.Sqrt(Math.Pow(bulletPoint.X - banditPoint.X, 2) + Math.Pow(bulletPoint.Y - banditPoint.Y, 2));
+                if (distance < 50 && !IsDead)
+                {
+                    Game.PlaySound("kill_bullet");
+                    IsDead = true;
+                    Game.Kills++;
+                }
             }
         }
 
@@ -228,6 +245,7 @@ namespace Ulearn_game
             Move();
             OnPaint(g);
             IsGettingMeleeDamage();
+            IsGettingRangeDamage();
             IsPlayerNear();
         }
 

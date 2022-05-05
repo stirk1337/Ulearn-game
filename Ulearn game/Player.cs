@@ -178,6 +178,7 @@ namespace Ulearn_game
                 IsAttacking = true;
             else
             {
+                Game.PlaySound("shoot");
                 Game.Bullets.Add(new Bullet(Angle, Width /2, Height/2, Mouse.X, Mouse.Y, Point));
             }
         }

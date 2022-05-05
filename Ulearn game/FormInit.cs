@@ -8,6 +8,7 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAudio.Wave;
 
 namespace Ulearn_game
 {
@@ -20,6 +21,8 @@ namespace Ulearn_game
         public static int[,] Level;
         public static int Kills;
         public static int LevelNumber;
+        private static WaveOutEvent outputDevice;
+        private static AudioFileReader audioFile;
         public Game()
         {
             InitializeComponent();
@@ -116,6 +119,7 @@ namespace Ulearn_game
                     Level[16, 7] = 3;
                     if (Level[x, y] == 3)
                     {
+                        PlaySound("LevelComplete");
                         LevelNumber++;
                         Kills = 0;
                         Bandits = new Bandit[]
@@ -151,25 +155,49 @@ namespace Ulearn_game
 
         public static void PlaySound(string sound)
         {
-            SoundPlayer simpleSound = new SoundPlayer();
+            outputDevice = new WaveOutEvent();
             if (sound == "kill")
             {
-                new System.Threading.Thread(() =>
-                {
-                    simpleSound = new SoundPlayer(Properties.Resources.kill); 
-                    simpleSound.Play();
-                }).Start();
+                audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\kill.wav");
+                outputDevice.Init(audioFile);
             }
 
             if (sound == "punch")
             {
-                new System.Threading.Thread(() =>
-                {
-                    simpleSound = new SoundPlayer(Properties.Resources.punch);
-                    simpleSound.Play();
-                }).Start();
+                audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\punch.wav");
+                outputDevice.Init(audioFile);
             }
 
+            if (sound == "shoot")
+            {
+                audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\pistol.wav");
+                outputDevice.Init(audioFile);
+            }
+
+            if (sound == "HitWall")
+            {
+                audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\HitWall.wav");
+                outputDevice.Init(audioFile);
+            }
+
+            if (sound == "kill_bullet")
+            {
+                audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\kill_bullet.wav");
+                outputDevice.Init(audioFile);
+            }
+
+            if (sound == "LevelComplete")
+            {
+                audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\LevelComplete.wav");
+                outputDevice.Init(audioFile);
+            }
+
+            if (sound == "change")
+            {
+                audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\change.wav");
+                outputDevice.Init(audioFile);
+            }
+            outputDevice.Play();
         }
 
         public void CreateMap(Graphics g)
@@ -209,6 +237,7 @@ namespace Ulearn_game
         {
             if (e.KeyCode == Keys.Q)
             {
+                PlaySound("change");
                 if (Player.Weapon == "punch1" || Player.Weapon == "punch2")
                     Player.Weapon = "pistol";
                 else if (Player.Weapon == "pistol")

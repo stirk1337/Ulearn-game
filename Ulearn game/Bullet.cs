@@ -13,12 +13,12 @@ namespace Ulearn_game
     public class Bullet
     {
         private float Angle;
-        private int Width;
-        private int Height;
+        public int Width;
+        public int Height;
         private Bitmap Sprite;
         private int DeltaWidth;
         private int DeltaHeight;
-        private PointF Point;
+        public PointF Point;
         private Point Destination;
         private float Speed;
         private float SpeedX;
@@ -34,9 +34,9 @@ namespace Ulearn_game
             Width = Sprite.Height;
             Height = Sprite.Width;
             Destination = new Point(destX, destY);
-            Speed = 50;
+            Speed = 70;
             Calculated = false;
-            Point = new PointF(playerPoint.X + deltaWidth, playerPoint.Y + deltaHeight);
+            Point = new PointF(playerPoint.X + deltaWidth / 2, playerPoint.Y + deltaHeight / 2);
         }
 
         public void OnPaint(Graphics g, int index)
@@ -78,7 +78,10 @@ namespace Ulearn_game
             try
             {
                 if (Game.Level[x, y] == 2 || Game.Level[x, y] == 4)
+                {
+                    Game.PlaySound("HitWall");
                     return true;
+                }
             }
             catch
             {
@@ -92,9 +95,16 @@ namespace Ulearn_game
             Calculated = true;
             var x = Destination.X - Point.X;
             var y = Destination.Y - Point.Y;
-            SpeedX = x > 0 ? Speed : -Speed;
-            SpeedY = y > 0 ? Math.Abs((y / x)) * -Speed : Math.Abs((y / x)) * Speed;
-            Debug.WriteLine(SpeedY);
+            if (Math.Abs(x) > Math.Abs(y))
+            {
+                SpeedX = x > 0 ? Speed : -Speed;
+                SpeedY = y > 0 ? Math.Abs((y / x)) * -Speed : Math.Abs((y / x)) * Speed;
+            }
+            else
+            {
+                SpeedY = y > 0 ? -Speed : Speed;
+                SpeedX = x > 0 ? Math.Abs((x / y)) * Speed : Math.Abs((x / y)) * -Speed;
+            }
         }
 
     }
