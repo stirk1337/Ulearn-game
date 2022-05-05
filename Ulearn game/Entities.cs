@@ -232,7 +232,7 @@ namespace Ulearn_game
             Height = 80;
             Point = new Point(point.X, point.Y);
             Weapon = "fist";
-            Speed = 5;
+            Speed = 10;
             IsDead = false;
             DeadAngle = -1;
             IsMoving = false;
