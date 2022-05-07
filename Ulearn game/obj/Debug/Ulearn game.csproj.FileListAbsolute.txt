@@ -1,0 +1,26 @@
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\Ulearn game.exe.config
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\Ulearn game.exe
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\Ulearn game.pdb
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.csproj.AssemblyReference.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.csproj.SuggestedBindingRedirects.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn_game.Properties.Resources.resources
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.csproj.GenerateResource.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.csproj.CoreCompileInputs.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.exe
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.pdb
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn_game.Game.resources
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.Asio.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.Core.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.Midi.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.Wasapi.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.WinForms.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.WinMM.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\System.Security.AccessControl.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\System.Security.AccessControl.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.csproj.CopyComplete
