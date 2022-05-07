@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
+using System.IO;
 
 namespace Ulearn_game
 {
@@ -126,10 +128,12 @@ namespace Ulearn_game
 
         public void PlayMusic(int level)
         {
+            var dir = Directory.GetParent(Directory.GetCurrentDirectory());
+            var path = Directory.GetParent(dir.ToString()).ToString();
             if (level == 1 && !IsMusic)
             {
                 IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\music\level1.wav");
+                WaveFileReader reader = new WaveFileReader(path + "/src/music/level1.wav");
                 LoopStream loop = new LoopStream(reader);
                 waveOut = new WaveOut();
                 waveOut.Init(loop);
@@ -139,7 +143,7 @@ namespace Ulearn_game
             if (level == 2 && !IsMusic)
             {
                 IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\music\level2.wav");
+                WaveFileReader reader = new WaveFileReader(path + "/src/music/level2.wav");
                 LoopStream loop = new LoopStream(reader);
                 waveOut = new WaveOut();
                 waveOut.Init(loop);
@@ -236,45 +240,47 @@ namespace Ulearn_game
         public static void PlaySound(string sound)
         {
             outputSound = new WaveOutEvent();
+            var dir = Directory.GetParent(Directory.GetCurrentDirectory());
+            var path = Directory.GetParent(dir.ToString()).ToString();
             if (sound == "kill")
             {
-                var audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\kill.wav");
+                var audioFile = new AudioFileReader(path + "/src/sound/kill.wav");
                 outputSound.Init(audioFile);
             }
 
             if (sound == "punch")
             {
-                var audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\punch.wav");
+                var audioFile = new AudioFileReader(path + "/src/sound/punch.wav");
                 outputSound.Init(audioFile);
             }
 
             if (sound == "shoot")
             {
-                var audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\pistol.wav");
+                var audioFile = new AudioFileReader(path + "/src/sound/pistol.wav");
                 outputSound.Init(audioFile);
             }
 
             if (sound == "HitWall")
             {
-                var audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\HitWall.wav");
+                var audioFile = new AudioFileReader(path + "/src/sound/HitWall.wav");
                 outputSound.Init(audioFile);
             }
 
             if (sound == "kill_bullet")
             {
-                var audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\kill_bullet.wav");
+                var audioFile = new AudioFileReader(path + "/src/sound/kill_bullet.wav");
                 outputSound.Init(audioFile);
             }
 
             if (sound == "LevelComplete")
             {
-                var audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\LevelComplete.wav");
+                var audioFile = new AudioFileReader(path + "/src/sound/LevelComplete.wav");
                 outputSound.Init(audioFile);
             }
 
             if (sound == "change")
             {
-                var audioFile = new AudioFileReader(@"C:\Users\stirk\source\repos\Ulearn game\Ulearn game\src\sound\change.wav");
+                var audioFile = new AudioFileReader(path + "/src/sound/change.wav");
                 outputSound.Init(audioFile);
             }
             outputSound.Play();
@@ -376,7 +382,7 @@ namespace Ulearn_game
                         new Bandit(new Point(300, 700), new Point(1, 1), "rifle", 0),
                     };
                 }
-            w
+            
             }
         }
     }

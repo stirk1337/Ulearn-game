@@ -127,21 +127,6 @@
   <data name="bandit_rifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\bandit\bandit_rifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bita_attack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\player\bita\bita_attack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bita_attack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\player\bita\bita_attack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bita_attack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\player\bita\bita_attack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bita_idle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\player\bita\bita_idle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bita_idle2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\player\bita\bita_idle2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="brick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\texture\brick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
