@@ -26,6 +26,7 @@ namespace Ulearn_game
         public bool IsMoving;
         public int Spawned;
         public Point AgroPoint;
+        public int AttackTick; 
 
         public void Rotate(Graphics g, float angle)
         {
@@ -167,7 +168,7 @@ namespace Ulearn_game
                 var bulletPoint = new PointF(bullet.Point.X + bullet.Width / 2, bullet.Point.Y + bullet.Height / 2);
                 var banditPoint = new PointF(Point.X + Width / 2, Point.Y + Height / 2);
                 var distance = Math.Sqrt(Math.Pow(bulletPoint.X - banditPoint.X, 2) + Math.Pow(bulletPoint.Y - banditPoint.Y, 2));
-                if (distance < 50 && !IsDead)
+                if (distance < 50 && !IsDead && bullet.IsAlly)
                 {
                     Game.PlaySound("kill_bullet");
                     IsDead = true;
@@ -187,6 +188,15 @@ namespace Ulearn_game
         {
             if (!IsMoving)
                 return;
+            AttackTick = (AttackTick + 1) % 100;
+            if (Weapon == "rifle" && AttackTick % 10 == 0)
+            {
+                Game.PlaySound("shoot");
+                Game.Bullets.Add(new Bullet(
+                    GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "player"), Width / 2,
+                    Height / 2, Game.Player.Point.X, Game.Player.Point.Y, Point, false));
+            }
+
             var moveTo = GetFastestPath();
             Debug.WriteLine(moveTo);
             if (moveTo.X < Point.X)
@@ -220,24 +230,33 @@ namespace Ulearn_game
 
     }
 
-
-
-
     public class Bandit : Entity
     {
-        public Bandit(Point point, Point agroPoint)
+        public Bandit(Point point, Point agroPoint, string weapon, int speed)
         {
-            Sprite = Properties.Resources.bandit;
-            Width = 80;
-            Height = 80;
             Point = new Point(point.X, point.Y);
-            Weapon = "fist";
-            Speed = 10;
+            Weapon = weapon;
+            if (Weapon == "fist")
+            {
+                Sprite = Properties.Resources.bandit;
+                Width = 80;
+                Height = 80;
+            }
+
+            if (Weapon == "rifle")
+            {
+                Sprite = Properties.Resources.bandit_rifle;
+                Width = 80;
+                Height = 80;
+            }
+
+            Speed = speed;
             IsDead = false;
             DeadAngle = -1;
             IsMoving = false;
             AgroPoint = new Point(agroPoint.X, agroPoint.Y);
             Spawned = 0;
+            AttackTick = 0;
         }
 
         public void Alive(Graphics g)

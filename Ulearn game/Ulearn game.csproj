@@ -259,5 +259,11 @@
   <ItemGroup>
     <None Include="src\texture\bullet.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\bandit\bandit_pistol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\bandit\bandit_rifle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

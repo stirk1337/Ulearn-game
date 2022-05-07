@@ -17,6 +17,7 @@ namespace Ulearn_game
         public static Player Player;
         public static Bandit[] Bandits;
         public static List<Bullet> Bullets;
+        public static List<Bullet> AngryBullets;
         Timer mainTimer = new Timer();
         public static int[,] Level;
         public static int Kills;
@@ -35,12 +36,12 @@ namespace Ulearn_game
             LevelNumber = 1;
             Bandits = new Bandit[]
             {
-                new Bandit(new Point(550,550), new Point(3,1)),
-                new Bandit(new Point(1550, 650), new Point(7,6)), 
-                new Bandit(new Point(850, 150), new Point(11,5)),
-                new Bandit(new Point(1450, 150), new Point(11,6)),
-                new Bandit(new Point(850, 350), new Point(11, 5)),
-                new Bandit(new Point(1450, 350), new Point(11,5)),
+                new Bandit(new Point(550,550), new Point(3,1), "fist", 10),
+                new Bandit(new Point(1550, 650), new Point(7,6), "fist", 10), 
+                new Bandit(new Point(850, 150), new Point(11,5), "fist", 10),
+                new Bandit(new Point(1450, 150), new Point(11,6), "fist", 10),
+                new Bandit(new Point(850, 350), new Point(11, 5), "fist", 10),
+                new Bandit(new Point(1450, 350), new Point(11,5), "fist", 10),
                 
             };
             Level = new int[,]
@@ -63,7 +64,6 @@ namespace Ulearn_game
                 {2, 1, 1, 1, 1, 2, 1, 1, 2},
                 {2, 2, 2, 2, 2, 2, 2, 2, 2},
             };
-
             DoubleBuffered = true;
             mainTimer.Interval = 20;
             KeyDown += GameKeyDown;
@@ -71,6 +71,7 @@ namespace Ulearn_game
             MouseMove += Player.UpdateAngle;
             MouseClick += Player.Attack;
             KeyUp += GameKeyChangeWeapon;
+            KeyUp += GameKeyRestartLevel;
             mainTimer.Tick += MainLoop;
             mainTimer.Start();
         }
@@ -198,7 +199,12 @@ namespace Ulearn_game
                         Kills = 0;
                         Bandits = new Bandit[]
                         {
-                            new Bandit(new Point(0, 0), new Point(0, 0)),
+                            new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
+                            new Bandit(new Point(1500, 500), new Point(1,1), "rifle", 0),
+                            new Bandit(new Point(1300, 700), new Point(1,1), "rifle", 0),
+                            new Bandit(new Point(900, 700), new Point(1,1), "rifle", 0),
+                            new Bandit(new Point(500, 700), new Point(1,1), "rifle", 0),
+                            new Bandit(new Point(300, 700), new Point(1,1), "rifle", 0),
                         };
                         Level = new int[,]
                         {
@@ -210,7 +216,7 @@ namespace Ulearn_game
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
-                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2}, 
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
@@ -318,6 +324,59 @@ namespace Ulearn_game
                 {
                     Player.Weapon = "punch1";
                 }
+            }
+        }
+
+        public void GameKeyRestartLevel(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.R)
+            {
+                Kills = 0;
+ 
+                mainTimer.Start();
+                Player.IsDead = false;
+                Player.Right = false;
+                Player.Left = false;
+                Player.Up = false;
+                Player.Down = false;
+                Player.Speed = 10;
+                Bullets.Clear();
+                if (LevelNumber == 1)
+                {
+                    Player.Point.X = 200;
+                    Player.Point.Y = 500;
+                    Bandits = new Bandit[]
+                    {
+                        new Bandit(new Point(550,550), new Point(3,1), "fist", 10),
+                        new Bandit(new Point(1550, 650), new Point(7,6), "fist", 10),
+                        new Bandit(new Point(850, 150), new Point(11,5), "fist", 10),
+                        new Bandit(new Point(1450, 150), new Point(11,6), "fist", 10),
+                        new Bandit(new Point(850, 350), new Point(11, 5), "fist", 10),
+                        new Bandit(new Point(1450, 350), new Point(11,5), "fist", 10),
+
+                    };
+                }
+
+                if (LevelNumber == 2)
+                {
+                    
+                }
+
+                if (LevelNumber == 3)
+                {
+                    Player.Point.X = 100;
+                    Player.Point.Y = 100;
+                    Bandits = new Bandit[]
+                    {
+                        new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
+                        new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
+                        new Bandit(new Point(1300, 700), new Point(1, 1), "rifle", 0),
+                        new Bandit(new Point(900, 700), new Point(1, 1), "rifle", 0),
+                        new Bandit(new Point(500, 700), new Point(1, 1), "rifle", 0),
+                        new Bandit(new Point(300, 700), new Point(1, 1), "rifle", 0),
+                    };
+                }
+            w
             }
         }
     }

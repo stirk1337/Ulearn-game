@@ -24,8 +24,9 @@ namespace Ulearn_game
         private float SpeedX;
         private float SpeedY;
         private bool Calculated;
+        public bool IsAlly;
 
-        public Bullet(float angle, int deltaWidth, int deltaHeight, int destX, int destY, Point playerPoint)
+        public Bullet(float angle, int deltaWidth, int deltaHeight, int destX, int destY, Point playerPoint, bool isAlly)
         {
             Angle = angle;
             DeltaWidth = deltaWidth;
@@ -34,9 +35,10 @@ namespace Ulearn_game
             Width = Sprite.Height;
             Height = Sprite.Width;
             Destination = new Point(destX, destY);
-            Speed = 70;
+            Speed = 30;
             Calculated = false;
             Point = new PointF(playerPoint.X + deltaWidth / 2, playerPoint.Y + deltaHeight / 2);
+            IsAlly = isAlly;
         }
 
         public void OnPaint(Graphics g, int index)

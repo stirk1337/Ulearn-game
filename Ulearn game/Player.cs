@@ -35,7 +35,7 @@ namespace Ulearn_game
             Down = false;
             Left = false;
             Right = false;
-            Point = new Point(200, 500);
+            Point = new Point(100, 500);
             Angle = 0;
             Speed = 10;
             Weapon = "punch1";
@@ -179,7 +179,7 @@ namespace Ulearn_game
             else
             {
                 Game.PlaySound("shoot");
-                Game.Bullets.Add(new Bullet(Angle, Width /2, Height/2, Mouse.X, Mouse.Y, Point));
+                Game.Bullets.Add(new Bullet(Angle, Width /2, Height/2, Mouse.X, Mouse.Y, Point, true));
             }
         }
 
@@ -193,9 +193,21 @@ namespace Ulearn_game
                 if (distance < 70 && !bandit.IsDead)
                 {
                     IsDead = true;
-                    KillerPoint = new Point(bandit.Point.X, bandit.Point.Y);
-                    KillerHeight = bandit.Height;
-                    KillerWidth = bandit.Width;
+                }
+            }
+        }
+
+        public void IsGettingRangeDamage()
+        {
+            foreach (var bullet in Game.Bullets)
+            {
+                var bulletPoint = new PointF(bullet.Point.X + bullet.Width / 2, bullet.Point.Y + bullet.Height / 2);
+                var playerPoint = new PointF(Point.X + Width / 2, Point.Y + Height / 2);
+                var distance = Math.Sqrt(Math.Pow(bulletPoint.X - playerPoint.X, 2) + Math.Pow(bulletPoint.Y - playerPoint.Y, 2));
+                if (distance < 50 && !IsDead && !bullet.IsAlly)
+                {
+                    Game.PlaySound("kill_bullet");
+                    IsDead = true;
                 }
             }
         }
@@ -205,6 +217,7 @@ namespace Ulearn_game
             OnPaint(g);
             Move();
             IsGettingMeleeDamage();
+            IsGettingRangeDamage();
             PlayAnimation();
         }
 
