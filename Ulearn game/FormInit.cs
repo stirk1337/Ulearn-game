@@ -365,6 +365,7 @@ namespace Ulearn_game
                 TimeSlowTick += 1;
                 if (TimeSlowTick == 100)
                 {
+                    waveOut.Play();
                     IsTimeBackAfterStop = true;
                     IsTimeStop = false;
                     foreach (var bandit in Bandits)
@@ -416,6 +417,7 @@ namespace Ulearn_game
                 if (!IsTimeStop && !IsTimeBackAfterStop)
                 {
                     IsTimeStop = true;
+                    waveOut.Stop();
                     PlaySound("slow");
                     foreach (var bandit in Bandits)
                     {
