@@ -27,6 +27,9 @@ namespace Ulearn_game
         public static bool IsMusic;
         private static WaveOutEvent outputSound;
         private WaveOut waveOut;
+        public static bool IsTimeStop;
+        public static bool IsTimeBackAfterStop;
+        public static int TimeSlowTick;
         public Game()
         {
             InitializeComponent();
@@ -35,7 +38,10 @@ namespace Ulearn_game
             Bullets = new List<Bullet>();
             Kills = 0;
             IsMusic = false;
+            IsTimeStop = false;
+            IsTimeBackAfterStop = false;
             LevelNumber = 1;
+            TimeSlowTick = 0;
             Bandits = new Bandit[]
             {
                 new Bandit(new Point(550,550), new Point(3,1), "fist", 10),
@@ -72,9 +78,9 @@ namespace Ulearn_game
             KeyUp += GameKeyUp;
             MouseMove += Player.UpdateAngle;
             MouseClick += Player.Attack;
-            KeyUp += GameKeyChangeWeapon;
-            KeyUp += GameKeyRestartLevel;
+            KeyUp += GameKeyControl;
             mainTimer.Tick += MainLoop;
+            mainTimer.Tick += CheckIsTimeSpeeding;
             mainTimer.Start();
         }
         
@@ -204,11 +210,7 @@ namespace Ulearn_game
                         Bandits = new Bandit[]
                         {
                             new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
-                            new Bandit(new Point(1500, 500), new Point(1,1), "rifle", 0),
-                            new Bandit(new Point(1300, 700), new Point(1,1), "rifle", 0),
-                            new Bandit(new Point(900, 700), new Point(1,1), "rifle", 0),
-                            new Bandit(new Point(500, 700), new Point(1,1), "rifle", 0),
-                            new Bandit(new Point(300, 700), new Point(1,1), "rifle", 0),
+                            
                         };
                         Level = new int[,]
                         {
@@ -283,6 +285,12 @@ namespace Ulearn_game
                 var audioFile = new AudioFileReader(path + "/src/sound/change.wav");
                 outputSound.Init(audioFile);
             }
+
+            if (sound == "slow")
+            {
+                var audioFile = new AudioFileReader(path + "/src/sound/slow.wav");
+                outputSound.Init(audioFile);
+            }
             outputSound.Play();
         }
 
@@ -319,7 +327,32 @@ namespace Ulearn_game
             if (e.KeyCode == Keys.S) { Player.Down = false; }
         }
 
-        public void GameKeyChangeWeapon(object sender, KeyEventArgs e)
+
+        public void CheckIsTimeSpeeding(object sender, EventArgs e)
+        {
+            if (!IsTimeBackAfterStop && IsTimeStop)
+            {
+                TimeSlowTick += 1;
+                if (TimeSlowTick == 100)
+                {
+                    IsTimeBackAfterStop = true;
+                    IsTimeStop = false;
+                    foreach (var bandit in Bandits)
+                    {
+                        bandit.Speed *= 3;
+                        bandit.AttackTickDivider /= 3;
+                    }
+
+                    foreach (var bullet in Bullets)
+                    {
+                        bullet.SpeedX *= 3;
+                        bullet.SpeedY *= 3;
+                    }
+                }
+            }
+        }
+
+        public void GameKeyControl(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Q)
             {
@@ -331,14 +364,30 @@ namespace Ulearn_game
                     Player.Weapon = "punch1";
                 }
             }
-        }
 
-        public void GameKeyRestartLevel(object sender, KeyEventArgs e)
-        {
+            if (e.KeyCode == Keys.E)
+            {
+                if (!IsTimeStop && !IsTimeBackAfterStop)
+                {
+                    IsTimeStop = true;
+                    PlaySound("slow");
+                    foreach (var bandit in Bandits)
+                    {
+                        bandit.Speed /= 3;
+                        bandit.AttackTickDivider *= 3;
+                    }
+
+                    foreach (var bullet in Bullets)
+                    { 
+                        bullet.SpeedX /= 3;
+                        bullet.SpeedY /= 3;
+                    }
+                }
+            }
+
             if (e.KeyCode == Keys.R)
             {
                 Kills = 0;
- 
                 mainTimer.Start();
                 Player.IsDead = false;
                 Player.Right = false;
@@ -346,6 +395,9 @@ namespace Ulearn_game
                 Player.Up = false;
                 Player.Down = false;
                 Player.Speed = 10;
+                TimeSlowTick = 0;
+                IsTimeStop = false;
+                IsTimeBackAfterStop = false;
                 Bullets.Clear();
                 if (LevelNumber == 1)
                 {
@@ -365,26 +417,23 @@ namespace Ulearn_game
 
                 if (LevelNumber == 2)
                 {
-                    
-                }
-
-                if (LevelNumber == 3)
-                {
                     Player.Point.X = 100;
                     Player.Point.Y = 100;
                     Bandits = new Bandit[]
                     {
                         new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
-                        new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
-                        new Bandit(new Point(1300, 700), new Point(1, 1), "rifle", 0),
-                        new Bandit(new Point(900, 700), new Point(1, 1), "rifle", 0),
-                        new Bandit(new Point(500, 700), new Point(1, 1), "rifle", 0),
-                        new Bandit(new Point(300, 700), new Point(1, 1), "rifle", 0),
                     };
                 }
-            
+
+                if (LevelNumber == 3)
+                {
+                    
+                }
+
             }
+
         }
+
     }
 
 }

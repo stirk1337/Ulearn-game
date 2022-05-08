@@ -20,9 +20,9 @@ namespace Ulearn_game
         private int DeltaHeight;
         public PointF Point;
         private Point Destination;
-        private float Speed;
-        private float SpeedX;
-        private float SpeedY;
+        public float Speed;
+        public float SpeedX;
+        public float SpeedY;
         private bool Calculated;
         public bool IsAlly;
 
@@ -35,7 +35,14 @@ namespace Ulearn_game
             Width = Sprite.Height;
             Height = Sprite.Width;
             Destination = new Point(destX, destY);
-            Speed = 30;
+            if (!Game.IsTimeStop)
+            {
+                Speed = 30;
+            }
+            else
+            {
+                Speed = 10;
+            }
             Calculated = false;
             Point = new PointF(playerPoint.X + deltaWidth / 2, playerPoint.Y + deltaHeight / 2);
             IsAlly = isAlly;

@@ -26,7 +26,8 @@ namespace Ulearn_game
         public bool IsMoving;
         public int Spawned;
         public Point AgroPoint;
-        public int AttackTick; 
+        public int AttackTick;
+        public int AttackTickDivider;
 
         public void Rotate(Graphics g, float angle)
         {
@@ -189,7 +190,7 @@ namespace Ulearn_game
             if (!IsMoving)
                 return;
             AttackTick = (AttackTick + 1) % 100;
-            if (Weapon == "rifle" && AttackTick % 10 == 0)
+            if (Weapon == "rifle" && AttackTick % AttackTickDivider == 0)
             {
                 Game.PlaySound("shoot");
                 Game.Bullets.Add(new Bullet(
@@ -257,6 +258,8 @@ namespace Ulearn_game
             AgroPoint = new Point(agroPoint.X, agroPoint.Y);
             Spawned = 0;
             AttackTick = 0;
+            if (Weapon == "rifle")
+                AttackTickDivider = 10;
         }
 
         public void Alive(Graphics g)
