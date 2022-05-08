@@ -37,11 +37,11 @@ namespace Ulearn_game
             Destination = new Point(destX, destY);
             if (!Game.IsTimeStop)
             {
-                Speed = 30;
+                Speed = 60;
             }
             else
             {
-                Speed = 10;
+                Speed = 30;
             }
             Calculated = false;
             Point = new PointF(playerPoint.X + deltaWidth / 2, playerPoint.Y + deltaHeight / 2);
