@@ -157,6 +157,22 @@ namespace Ulearn_game
             }
         }
 
+        public void NextLevel()
+        {
+            waveOut.Stop();
+            waveOut.Dispose();
+            waveOut = null;
+            IsMusic = false;
+            PlaySound("LevelComplete");
+            LevelNumber++;
+            PlayMusic(LevelNumber);
+            Kills = 0;
+            IsTimeStop = false;
+            IsTimeBackAfterStop = false;
+            TimeSlowTick = 0;
+        }
+
+
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -199,18 +215,13 @@ namespace Ulearn_game
                     Level[16, 7] = 3;
                     if (Level[x, y] == 3)
                     {
-                        waveOut.Stop();
-                        waveOut.Dispose();
-                        waveOut = null;
-                        IsMusic = false;
-                        PlaySound("LevelComplete");
-                        LevelNumber++;
-                        PlayMusic(LevelNumber);
-                        Kills = 0;
+                        NextLevel();
                         Bandits = new Bandit[]
                         {
-                            new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
-                            
+                            new Bandit(new Point(1500, 100), new Point(4, 4), "rifle", 0),
+                            new Bandit(new Point(1500, 700), new Point(4, 4), "rifle", 0),
+                            new Bandit(new Point(550, 100), new Point(5,4), "fist", 10),
+                            new Bandit(new Point(550, 700), new Point(5,4), "fist", 10),
                         };
                         Level = new int[,]
                         {
@@ -218,7 +229,7 @@ namespace Ulearn_game
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
-                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 2, 2, 2, 1, 2, 2, 2, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
@@ -231,6 +242,25 @@ namespace Ulearn_game
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 1, 1, 1, 1, 1, 1, 1, 2},
                             {2, 2, 2, 2, 2, 2, 2, 2, 2},
+                        };
+                        Player.Point.X = 100;
+                        Player.Point.Y = 100;
+                    }
+                }
+
+                else if (LevelNumber == 2)
+                {
+                    Level[16, 4] = 3;
+                    if (Level[x, y] == 3)
+                    {
+                        NextLevel();
+                        Bandits = new Bandit[]
+                        {
+
+                        };
+                        Level = new int[,]
+                        {
+                            
                         };
                         Player.Point.X = 100;
                         Player.Point.Y = 100;
@@ -352,6 +382,22 @@ namespace Ulearn_game
             }
         }
 
+        public void ClearLevel()
+        {
+            Kills = 0;
+            mainTimer.Start();
+            Player.IsDead = false;
+            Player.Right = false;
+            Player.Left = false;
+            Player.Up = false;
+            Player.Down = false;
+            Player.Speed = 10;
+            TimeSlowTick = 0;
+            IsTimeStop = false;
+            IsTimeBackAfterStop = false;
+            Bullets.Clear();
+        }
+
         public void GameKeyControl(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Q)
@@ -385,20 +431,10 @@ namespace Ulearn_game
                 }
             }
 
+
             if (e.KeyCode == Keys.R)
             {
-                Kills = 0;
-                mainTimer.Start();
-                Player.IsDead = false;
-                Player.Right = false;
-                Player.Left = false;
-                Player.Up = false;
-                Player.Down = false;
-                Player.Speed = 10;
-                TimeSlowTick = 0;
-                IsTimeStop = false;
-                IsTimeBackAfterStop = false;
-                Bullets.Clear();
+                ClearLevel();
                 if (LevelNumber == 1)
                 {
                     Player.Point.X = 200;
@@ -421,7 +457,10 @@ namespace Ulearn_game
                     Player.Point.Y = 100;
                     Bandits = new Bandit[]
                     {
-                        new Bandit(new Point(1500, 500), new Point(1, 1), "rifle", 0),
+                        new Bandit(new Point(1500, 100), new Point(4, 4), "rifle", 0),
+                        new Bandit(new Point(1500, 700), new Point(4, 4), "rifle", 0),
+                        new Bandit(new Point(550, 100), new Point(5,4), "fist", 10),
+                        new Bandit(new Point(550, 700), new Point(5,4), "fist", 10),
                     };
                 }
 
