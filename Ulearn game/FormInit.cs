@@ -82,6 +82,7 @@ namespace Ulearn_game
             mainTimer.Tick += MainLoop;
             mainTimer.Tick += CheckIsTimeSpeeding;
             mainTimer.Start();
+
         }
         
         public void MainLoop(object sender, EventArgs e)
@@ -170,6 +171,17 @@ namespace Ulearn_game
             IsTimeStop = false;
             IsTimeBackAfterStop = false;
             TimeSlowTick = 0;
+            Player.LastAmmo = Player.Ammo;
+        }
+
+        public void CreateInterface(Graphics g)
+        {
+            var font = new Font("Comic Sans MS", 32);
+            StringFormat drawFormat = new StringFormat();
+            SolidBrush drawBrush = new SolidBrush(Color.Black);
+            g.DrawString("Патроны: " + Player.Ammo.ToString(), font, drawBrush, 100,820);
+            var timeReady = !IsTimeStop && !IsTimeBackAfterStop ? "ГОТОВО": "НЕ ГОТОВО";
+            g.DrawString("Замедление времени: " + timeReady, font, drawBrush, 950, 820);
         }
 
 
@@ -204,6 +216,7 @@ namespace Ulearn_game
                 PlaySound("kill");
                 mainTimer.Stop();
             }
+            CreateInterface(g);
 
             if (Kills == Bandits.Length)
             {
@@ -397,6 +410,7 @@ namespace Ulearn_game
             IsTimeStop = false;
             IsTimeBackAfterStop = false;
             Bullets.Clear();
+            Player.Ammo = Player.LastAmmo;
         }
 
         public void GameKeyControl(object sender, KeyEventArgs e)

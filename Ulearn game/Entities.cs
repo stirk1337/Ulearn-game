@@ -158,6 +158,7 @@ namespace Ulearn_game
             {
                 Game.PlaySound("kill");
                 IsDead = true;
+                Game.Player.Ammo += 2;
                 Game.Kills++;
             }
         }

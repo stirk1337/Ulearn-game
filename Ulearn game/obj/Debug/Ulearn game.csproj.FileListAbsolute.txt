@@ -24,3 +24,8 @@ C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\NAudio.xml
 C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\System.Security.AccessControl.xml
 C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\System.Security.Principal.Windows.xml
 C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.csproj.CopyComplete
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\Ulearn game.exe.manifest
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Debug\Ulearn game.application
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.TrustInfo.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.exe.manifest
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Debug\Ulearn game.application

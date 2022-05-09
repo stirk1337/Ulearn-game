@@ -25,6 +25,8 @@ namespace Ulearn_game
         public Point KillerPoint { get; set; }
         public int KillerHeight { get; set; }
         public int KillerWidth { get; set; }
+        public int Ammo { get; set; }
+        public int LastAmmo { get; set; }
 
         public Player()
         {
@@ -42,6 +44,8 @@ namespace Ulearn_game
             IsAttacking = false;
             CurrentFrame = 0;
             IsDead = false;
+            Ammo = 0;
+            LastAmmo = 0;
             Punch1 = new Bitmap[]
             {
                 new Bitmap(Properties.Resources.punch1_0, Width, Height),
@@ -176,9 +180,10 @@ namespace Ulearn_game
         {
             if(Weapon == "punch1" || Weapon == "punch2")
                 IsAttacking = true;
-            else
+            else if(Ammo > 0)
             {
                 Game.PlaySound("shoot");
+                Ammo -= 1;
                 Game.Bullets.Add(new Bullet(Angle, Width /2, Height/2, Mouse.X, Mouse.Y, Point, true));
             }
         }
