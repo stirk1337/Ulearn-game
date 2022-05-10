@@ -214,6 +214,10 @@ namespace Ulearn_game
             {
                 Player.Dead(g);
                 PlaySound("kill");
+                var font = new Font("Comic Sans MS", 70);
+                StringFormat drawFormat = new StringFormat();
+                SolidBrush drawBrush = new SolidBrush(Color.White);
+                g.DrawString("Нажми R, чтобы начать сначала", font, drawBrush, 100,400);
                 mainTimer.Stop();
             }
             CreateInterface(g);
@@ -332,6 +336,12 @@ namespace Ulearn_game
             if (sound == "slow")
             {
                 var audioFile = new AudioFileReader(path + "/src/sound/slow.wav");
+                outputSound.Init(audioFile);
+            }
+
+            if (sound == "noAmmo")
+            {
+                var audioFile = new AudioFileReader(path + "/src/sound/no_ammo.wav");
                 outputSound.Init(audioFile);
             }
             outputSound.Play();

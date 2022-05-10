@@ -186,6 +186,10 @@ namespace Ulearn_game
                 Ammo -= 1;
                 Game.Bullets.Add(new Bullet(Angle, Width /2, Height/2, Mouse.X, Mouse.Y, Point, true));
             }
+            else
+            {
+                Game.PlaySound("noAmmo");
+            }
         }
 
         public void IsGettingMeleeDamage()
