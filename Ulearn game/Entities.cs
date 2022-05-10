@@ -48,7 +48,7 @@ namespace Ulearn_game
             var y = (Point.Y + Height / 2) / 100;
             try
             {
-                if (Game.Level[x, y] == 2 || Game.Level[x,y] == 4)
+                if (Game.Level[x, y] == 2 || Game.Level[x,y] == 4 || Game.Level[x,y] == 5)
                     return true;
             }
             catch
@@ -158,7 +158,7 @@ namespace Ulearn_game
             {
                 Game.PlaySound("kill");
                 IsDead = true;
-                Game.Player.Ammo += 2;
+                Game.Player.Ammo += 1;
                 Game.Kills++;
             }
         }

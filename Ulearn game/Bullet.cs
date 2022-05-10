@@ -86,7 +86,7 @@ namespace Ulearn_game
             var y = (int)(Point.Y + Height / 2) / 100;
             try
             {
-                if (Game.Level[x, y] == 2 || Game.Level[x, y] == 4)
+                if (Game.Level[x, y] == 2 || Game.Level[x, y] == 4 || (Game.Level[x,y] == 5 && IsAlly))
                 {
                     Game.PlaySound("HitWall");
                     return true;
