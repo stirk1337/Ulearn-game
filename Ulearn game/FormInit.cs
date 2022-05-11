@@ -166,6 +166,16 @@ namespace Ulearn_game
                 waveOut.Init(loop);
                 waveOut.Play();
             }
+
+            if (level == 4 && !IsMusic)
+            {
+                IsMusic = true;
+                WaveFileReader reader = new WaveFileReader(path + "/src/music/level4.wav");
+                LoopStream loop = new LoopStream(reader);
+                waveOut = new WaveOut();
+                waveOut.Init(loop);
+                waveOut.Play();
+            }
         }
 
         public void NextLevel()
@@ -312,6 +322,60 @@ namespace Ulearn_game
                         };
                         Player.Point.X = 100;
                         Player.Point.Y = 400;
+                    }
+                }
+                else if (LevelNumber == 3)
+                {
+                    Level[16, 4] = 3;
+                    if (Level[x, y] == 3)
+                    {
+                        NextLevel();
+                        Bandits = new Bandit[]
+                        {
+                            new Bandit(new Point(100, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(500, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(700, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(900, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1100, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1500, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(100, 300), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(100, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(100, 700), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1500, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 300), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(300, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(500, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(900, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1100, 500), new Point(7,7), "fist", 10),
+                        };
+                        Level = new int[,]
+                        {
+                            {2, 2, 2, 2, 2, 2, 2, 2, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 4},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 2, 2, 2, 2, 2, 2, 2, 2},
+                        };
+                        Player.Point.X = 700;
+                        Player.Point.Y = 700;
                     }
                 }
             }
@@ -513,6 +577,7 @@ namespace Ulearn_game
             if (e.KeyCode == Keys.R)
             {
                 ClearLevel();
+                waveOut.Play();
                 if (LevelNumber == 1)
                 {
                     Player.Point.X = 200;
@@ -555,6 +620,56 @@ namespace Ulearn_game
                     };
                     Player.Point.X = 100;
                     Player.Point.Y = 400;
+                }
+
+                if (LevelNumber == 4)
+                {
+                    Bandits = new Bandit[]
+                        {
+                            new Bandit(new Point(100, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(500, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(700, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(900, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1100, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1500, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(100, 300), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(100, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(100, 700), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1500, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 300), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1300, 100), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(300, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(500, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(900, 500), new Point(7,7), "fist", 10),
+                            new Bandit(new Point(1100, 500), new Point(7,7), "fist", 10),
+                        };
+                    Level = new int[,]
+                    {
+                            {2, 2, 2, 2, 2, 2, 2, 2, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 4},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 1, 1, 1, 1, 1, 1, 1, 2},
+                            {2, 2, 2, 2, 2, 2, 2, 2, 2},
+                    };
+                    Player.Point.X = 700;
+                    Player.Point.Y = 700;
                 }
 
             }
