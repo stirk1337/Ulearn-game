@@ -1,0 +1,31 @@
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\Ulearn game.exe.config
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\Ulearn game.exe.manifest
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\Ulearn game.application
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\Ulearn game.exe
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\Ulearn game.pdb
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\Microsoft.Win32.Registry.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.Asio.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.Core.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.Midi.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.Wasapi.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.WinForms.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.WinMM.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\System.Security.AccessControl.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\System.Security.Principal.Windows.dll
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\Microsoft.Win32.Registry.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\NAudio.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\System.Security.AccessControl.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\bin\Release\System.Security.Principal.Windows.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.csproj.AssemblyReference.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.csproj.SuggestedBindingRedirects.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn_game.Game.resources
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn_game.Properties.Resources.resources
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.csproj.GenerateResource.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.csproj.CoreCompileInputs.cache
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.TrustInfo.xml
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.exe.manifest
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.application
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.csproj.CopyComplete
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.exe
+C:\Users\stirk\source\repos\Ulearn game\Ulearn game\obj\Release\Ulearn game.pdb
