@@ -316,5 +316,8 @@
   <ItemGroup>
     <None Include="src\texture\glass.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\texture\brick3.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

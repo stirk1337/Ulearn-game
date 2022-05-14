@@ -631,8 +631,7 @@ namespace Ulearn_game
                         g.DrawImage(Properties.Resources.brick_old, i * 100, j * 100);
                     else if (Level[i, j] == 5)
                     {
-                        g.DrawImage(Properties.Resources.brick1, i * 100, j * 100);
-                        g.DrawImage(Properties.Resources.glass, i * 100, j * 100);
+                        g.DrawImage(Properties.Resources.brick3, i * 100, j * 100);
                     }
                 }
             }

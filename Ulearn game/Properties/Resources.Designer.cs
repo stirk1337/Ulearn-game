@@ -93,16 +93,6 @@ namespace Ulearn_game.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap brick {
-            get {
-                object obj = ResourceManager.GetObject("brick", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap brick_go {
             get {
                 object obj = ResourceManager.GetObject("brick_go", resourceCulture);
@@ -143,6 +133,16 @@ namespace Ulearn_game.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap brick3 {
+            get {
+                object obj = ResourceManager.GetObject("brick3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bullet {
             get {
                 object obj = ResourceManager.GetObject("bullet", resourceCulture);
@@ -156,26 +156,6 @@ namespace Ulearn_game.Properties {
         internal static System.Drawing.Bitmap floor_blue {
             get {
                 object obj = ResourceManager.GetObject("floor_blue", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap floor_brick {
-            get {
-                object obj = ResourceManager.GetObject("floor_brick", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap glass {
-            get {
-                object obj = ResourceManager.GetObject("glass", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

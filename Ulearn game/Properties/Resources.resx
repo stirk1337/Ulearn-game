@@ -127,14 +127,14 @@
   <data name="bandit_rifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\bandit\bandit_rifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="brick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\texture\brick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="brick1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\texture\brick.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="brick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\texture\brick2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="brick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\texture\brick3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="brick_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\texture\brick_go.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -147,12 +147,6 @@
   </data>
   <data name="floor_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\texture\floor_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floor_brick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\texture\floor_brick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\texture\glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="jacket_dead_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\jacket\jacket_dead_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
