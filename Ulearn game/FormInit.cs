@@ -437,11 +437,9 @@ namespace Ulearn_game
                             new Bandit(new Point(1000,100), new Point(9,2), "fist", 10),
                             new Bandit(new Point(1500, 100), new Point(8,7), "rifle", 3),
                             new Bandit(new Point(500,100), new Point(6,2), "fist", 10),
-                            new Bandit(new Point(100,100), new Point(8,7), "rifle", 3),
                             new Bandit(new Point(500,700), new Point(7,5), "fist", 10),
                             new Bandit(new Point(100, 700), new Point(8,7), "rifle",3),
                             new Bandit(new Point(1000,700), new Point(9,5), "fist", 10),
-                            new Bandit(new Point(1500, 700), new Point(8,7), "rifle", 3),
                         };
                         Level = new int[,]
                         {
@@ -911,11 +909,9 @@ namespace Ulearn_game
                         new Bandit(new Point(1000,100), new Point(9,2), "fist", 10),
                         new Bandit(new Point(1500, 100), new Point(8,7), "rifle", 3),
                         new Bandit(new Point(500,100), new Point(6,2), "fist", 10),
-                        new Bandit(new Point(100,100), new Point(8,7), "rifle", 3),
                         new Bandit(new Point(500,700), new Point(7,5), "fist", 10),
                         new Bandit(new Point(100, 700), new Point(8,7), "rifle",3),
                         new Bandit(new Point(1000,700), new Point(9,5), "fist", 10),
-                        new Bandit(new Point(1500, 700), new Point(8,7), "rifle", 3),
                     };
                     Level = new int[,]
                     {
