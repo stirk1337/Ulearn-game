@@ -354,19 +354,6 @@ namespace Ulearn_game
                 }
             }
 
-            //DEBUG BUTTON
-            //if (e.KeyCode == Keys.G)
-            //{
-            //    Kills = Bandits.Length;
-            //    foreach (var bandit in Bandits)
-            //    {
-            //        bandit.IsDead = true;
-            //    }
-            //    Player.Speed = 35;
-            //    Player.Ammo = 100;
-            //}
-            //END OF DEBUG BUTTON
-
             if (e.KeyCode == Keys.R)
             {
                 ClearLevel();
