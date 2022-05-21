@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 using System.IO;
@@ -19,7 +12,6 @@ namespace Ulearn_game
         public static Player Player;
         public static Bandit[] Bandits;
         public static List<Bullet> Bullets;
-        public static List<Bullet> AngryBullets;
         Timer mainTimer = new Timer();
         public static int[,] Level;
         public static int Kills;
@@ -92,129 +84,19 @@ namespace Ulearn_game
             Invalidate();
         }
 
-        public class LoopStream : WaveStream
+        public void ChangeLevelMusic(int level)
         {
-            WaveStream sourceStream;
-            public LoopStream(WaveStream sourceStream)
-            {
-                this.sourceStream = sourceStream;
-                this.EnableLooping = true;
-            }
-            public bool EnableLooping { get; set; }
-            public override WaveFormat WaveFormat
-            {
-                get { return sourceStream.WaveFormat; }
-            }
-            public override long Length
-            {
-                get { return sourceStream.Length; }
-            }
-            public override long Position
-            {
-                get { return sourceStream.Position; }
-                set { sourceStream.Position = value; }
-            }
-            public override int Read(byte[] buffer, int offset, int count)
-            {
-                int totalBytesRead = 0;
-
-                while (totalBytesRead < count)
-                {
-                    int bytesRead = sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
-                    if (bytesRead == 0)
-                    {
-                        if (sourceStream.Position == 0 || !EnableLooping)
-                        {
-                            break;
-                        }
-                        sourceStream.Position = 0;
-                    }
-                    totalBytesRead += bytesRead;
-                }
-                return totalBytesRead;
-            }
-        }
-
-        public void PlayMusic(int level)
-        {
+            if (IsMusic)
+                return;
             var dir = Directory.GetParent(Directory.GetCurrentDirectory());
             var path = Directory.GetParent(dir.ToString()).ToString();
-            if (level == 1 && !IsMusic)
-            {
-                IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(path + "/src/music/level1.wav");
-                LoopStream loop = new LoopStream(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Volume = 0.3f;
-                waveOut.Play();
-            }
-
-            if (level == 2 && !IsMusic)
-            {
-                IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(path + "/src/music/level2.wav");
-                LoopStream loop = new LoopStream(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Volume = 0.3f;
-                waveOut.Play();
-            }
-
-            if (level == 3 && !IsMusic)
-            {
-                IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(path + "/src/music/level3.wav");
-                LoopStream loop = new LoopStream(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Volume = 0.3f;
-                waveOut.Play();
-            }
-
-            if (level == 4 && !IsMusic)
-            {
-                IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(path + "/src/music/level4.wav");
-                LoopStream loop = new LoopStream(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Volume = 0.3f;
-                waveOut.Play();
-            }
-
-            if (level == 5 && !IsMusic)
-            {
-                IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(path + "/src/music/level5.wav");
-                LoopStream loop = new LoopStream(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Volume = 0.3f;
-                waveOut.Play();
-            }
-
-            if (level == 6 && !IsMusic)
-            {
-                IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(path + "/src/music/level6.wav");
-                LoopStream loop = new LoopStream(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Volume = 0.3f;
-                waveOut.Play();
-            }
-
-            if (level == 7 && !IsMusic)
-            {
-                IsMusic = true;
-                WaveFileReader reader = new WaveFileReader(path + "/src/music/final.wav");
-                LoopStream loop = new LoopStream(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Volume = 0.3f;
-                waveOut.Play();
-            }
+            IsMusic = true;
+            WaveFileReader reader = new WaveFileReader(path + "/src/music/level" + LevelNumber.ToString() + ".wav");
+            LoopStream loop = new LoopStream(reader);
+            waveOut = new WaveOut();
+            waveOut.Init(loop);
+            waveOut.Volume = 0.3f;
+            waveOut.Play();
         }
 
         public void NextLevel()
@@ -225,7 +107,7 @@ namespace Ulearn_game
             IsMusic = false;
             PlaySound("LevelComplete");
             LevelNumber++;
-            PlayMusic(LevelNumber);
+            ChangeLevelMusic(LevelNumber);
             Kills = 0;
             IsTimeStop = false;
             IsTimeBackAfterStop = false;
@@ -247,13 +129,11 @@ namespace Ulearn_game
                 g.DrawString("Конец игры\nАвтор: stirk\nСпасибо, что играли", font, drawBrush, 350, 300);
             }
         }
-
-
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
             CreateMap(g);
-            PlayMusic(LevelNumber);
+            ChangeLevelMusic(LevelNumber);
             for (int i = Bullets.Count - 1; i >= 0; i--)
             {
                Bullets[i].OnPaint(g, i);
@@ -269,7 +149,6 @@ namespace Ulearn_game
                     bandit.Dead(g);
                 }
             }
-
             if (!Player.IsDead)
             {
                 Player.Alive(g);
@@ -285,8 +164,6 @@ namespace Ulearn_game
                 mainTimer.Stop();
             }
             CreateInterface(g);
-
-            //next level trigger
             if (Kills == Bandits.Length)
             {
                 var x = (Player.Point.X + Player.Width / 2) / 100;

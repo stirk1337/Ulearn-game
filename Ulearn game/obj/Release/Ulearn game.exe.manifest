@@ -162,14 +162,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ulearn game.exe" size="297440">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ulearn game.exe" size="295392">
       <assemblyIdentity name="Ulearn game" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>9rBkWp8RX2kdctskAEY0i/ddbFdht2gMsVkjwLRJ5nE=</dsig:DigestValue>
+        <dsig:DigestValue>mMRlH0AD1L8XdsKEGI35GzwkXwttTAi25JOBM91VAbg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

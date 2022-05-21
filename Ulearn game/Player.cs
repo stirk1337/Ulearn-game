@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Ulearn_game.Properties;
-
 
 namespace Ulearn_game
 {
@@ -73,7 +65,6 @@ namespace Ulearn_game
                 new Bitmap(Properties.Resources.jacket_dead_3, Width, Height),
                 new Bitmap(Properties.Resources.jacket_dead_3, Width, Height),
             };
-            
         }
 
         public void Move()
@@ -191,7 +182,6 @@ namespace Ulearn_game
                 Game.PlaySound("noAmmo");
             }
         }
-
         public void IsGettingMeleeDamage()
         {
             foreach (var bandit in Game.Bandits)
@@ -205,7 +195,6 @@ namespace Ulearn_game
                 }
             }
         }
-
         public void IsGettingRangeDamage()
         {
             foreach (var bullet in Game.Bullets)
@@ -220,7 +209,6 @@ namespace Ulearn_game
                 }
             }
         }
-
         public void Alive(Graphics g)
         {
             OnPaint(g);
@@ -229,7 +217,6 @@ namespace Ulearn_game
             IsGettingRangeDamage();
             PlayAnimation();
         }
-
         public void Dead(Graphics g)
         {
             var rnd = new Random();

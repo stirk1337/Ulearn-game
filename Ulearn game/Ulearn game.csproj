@@ -112,7 +112,7 @@
   <ItemGroup>
     <Compile Include="Bullet.cs" />
     <Compile Include="Entities.cs" />
-    <Compile Include="IEntity.cs" />
+    <Compile Include="LoopStreamNAudio.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="FormInit.cs">
       <SubType>Form</SubType>

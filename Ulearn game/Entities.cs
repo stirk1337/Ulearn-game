@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Ulearn_game
 {
-
     public class Entity
     {
         public Bitmap Sprite;
@@ -92,7 +85,6 @@ namespace Ulearn_game
                     }
                 }
             }
-
             try
             {
                 path[end.X, end.Y][1] = new Point(path[end.X, end.Y][1].X * 100 + 50, path[end.X, end.Y][1].Y * 100 + 50);
@@ -105,7 +97,6 @@ namespace Ulearn_game
                 return new Point((Game.Player.Point.X + Game.Player.Width / 2),
                     (Game.Player.Point.Y + Game.Player.Height / 2));
             }
-
         }
 
         public float GetAngleToTarget(Point playerPoint, int playerWidth, int playerHeight, string target)
@@ -119,10 +110,8 @@ namespace Ulearn_game
                 Spawned = spawnAngles[(Point.X + Point.Y) % spawnAngles.Length];
                 return Spawned;
             }
-
             if (!IsMoving)
                 return Spawned;
-
             var y = 0.0;
             var x = 0.0;
             if (target == "player")
@@ -142,10 +131,8 @@ namespace Ulearn_game
                 y = block.Y + 50 - Point.Y - Height / 2f;
                 x = block.X + 50 - Point.X - Width / 2f;
             }
-
             return (float)Math.Atan2(y, x) * 180 / (float)Math.PI;
         }
-
         public void IsGettingMeleeDamage()
         {
             Point player = new Point(Game.Player.Point.X + Game.Player.Width / 2, Game.Player.Point.Y + Game.Player.Height / 2);
@@ -162,7 +149,6 @@ namespace Ulearn_game
                 Game.Kills++;
             }
         }
-
         public void IsGettingRangeDamage()
         {
             foreach (var bullet in Game.Bullets)
@@ -178,14 +164,11 @@ namespace Ulearn_game
                 }
             }
         }
-
         public void IsPlayerNear()
         {
             if((Game.Player.Point.X + Game.Player.Width / 2) / 100 == AgroPoint.X && (Game.Player.Point.Y + Game.Player.Height / 2) / 100 == AgroPoint.Y)
                 IsMoving = true;
         }
-
-
         public void Move()
         {
             if (!IsMoving)
@@ -198,7 +181,6 @@ namespace Ulearn_game
                     GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "player"), Width / 2,
                     Height / 2, Game.Player.Point.X, Game.Player.Point.Y, Point, false));
             }
-
             var moveTo = GetFastestPath();
             Debug.WriteLine(moveTo);
             if (moveTo.X < Point.X)
@@ -213,7 +195,6 @@ namespace Ulearn_game
                 if (IsWall())
                     Point = new Point(Point.X - Speed, Point.Y);
             }
-
             if (moveTo.Y < Point.Y)
             {
                 Point = new Point(Point.X, Point.Y - Speed);
@@ -226,10 +207,7 @@ namespace Ulearn_game
                 if (IsWall())
                     Point = new Point(Point.X, Point.Y - Speed);
             }
-
-
         }
-
     }
 
     public class Bandit : Entity
@@ -244,14 +222,12 @@ namespace Ulearn_game
                 Width = 80;
                 Height = 80;
             }
-
             if (Weapon == "rifle")
             {
                 Sprite = Properties.Resources.bandit_rifle;
                 Width = 80;
                 Height = 80;
             }
-
             Speed = speed;
             IsDead = false;
             DeadAngle = -1;
@@ -262,7 +238,6 @@ namespace Ulearn_game
             if (Weapon == "rifle")
                 AttackTickDivider = 10;
         }
-
         public void Alive(Graphics g)
         {
             Move();
@@ -271,7 +246,6 @@ namespace Ulearn_game
             IsGettingRangeDamage();
             IsPlayerNear();
         }
-
         public void Dead(Graphics g)
         {
             Sprite = Properties.Resources.bandit_dead;
@@ -282,10 +256,8 @@ namespace Ulearn_game
             {
                 DeadAngle = GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "bandit");
             }
-
             OnPaint(g);
         }
-
         public void OnPaint(Graphics g)
         {
             var angle = IsDead
@@ -293,6 +265,5 @@ namespace Ulearn_game
                 : GetAngleToTarget(Game.Player.Point, Game.Player.Width, Game.Player.Height, "player");
             Rotate(g, angle);   
         }
-
     }
 }

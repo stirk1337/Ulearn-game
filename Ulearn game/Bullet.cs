@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ulearn_game
 {
@@ -16,8 +9,6 @@ namespace Ulearn_game
         public int Width;
         public int Height;
         private Bitmap Sprite;
-        private int DeltaWidth;
-        private int DeltaHeight;
         public PointF Point;
         private Point Destination;
         public float Speed;
@@ -29,20 +20,11 @@ namespace Ulearn_game
         public Bullet(float angle, int deltaWidth, int deltaHeight, int destX, int destY, Point playerPoint, bool isAlly)
         {
             Angle = angle;
-            DeltaWidth = deltaWidth;
-            DeltaHeight = deltaHeight;
             Sprite = new Bitmap(Properties.Resources.bullet);
             Width = Sprite.Height;
             Height = Sprite.Width;
             Destination = new Point(destX, destY);
-            if (!Game.IsTimeStop)
-            {
-                Speed = 60;
-            }
-            else
-            {
-                Speed = 30;
-            }
+            Speed = !Game.IsTimeStop ? 60 : 30;
             Calculated = false;
             Point = new PointF(playerPoint.X + deltaWidth / 2, playerPoint.Y + deltaHeight / 2);
             IsAlly = isAlly;
@@ -54,7 +36,6 @@ namespace Ulearn_game
                 CalculateDestination();
             Rotate(g, Angle);
             Move(index);
-            //g.DrawImage(Sprite, Point.X, Point.Y);
         }
 
         public void Move(int index)
@@ -78,7 +59,6 @@ namespace Ulearn_game
             }
             g.DrawImage(rotated, Point.X, Point.Y, Width, Height);
         }
-
 
         public bool IsWall()
         {
@@ -115,9 +95,5 @@ namespace Ulearn_game
                 SpeedX = x > 0 ? Math.Abs((x / y)) * Speed : Math.Abs((x / y)) * -Speed;
             }
         }
-
     }
-
-
-
 }
