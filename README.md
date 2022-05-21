@@ -1,7 +1,7 @@
 # Ulearn-game
 🎮Game on win.forms for Ulearn.me
 
-![Иллюстрация к проекту](https://github.com/stirk1337/Ulearn-game/tree/master/Ulearn%20game/src/picture/1.png)
+![1](https://user-images.githubusercontent.com/63664630/169667554-a6b51201-ea4c-4170-85c6-4a03b0163a63.png)
 
 # Управление
 * Q - сменить оружие
