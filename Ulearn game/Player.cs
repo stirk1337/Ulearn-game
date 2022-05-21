@@ -7,18 +7,18 @@ namespace Ulearn_game
     public class Player: Entity
     {
         public bool Up, Down, Left, Right;
-        public float Angle { get; set; }
-        public Point Mouse { get; set; }
-        public bool IsAttacking { get; set; } 
-        public int CurrentFrame { get; set; }
+        public float Angle;
+        public Point Mouse;
+        public bool IsAttacking;
+        public int CurrentFrame;
         public Bitmap[] Punch1;
         public Bitmap[] Punch2;
         public Bitmap[] DeadSprites;
-        public Point KillerPoint { get; set; }
-        public int KillerHeight { get; set; }
-        public int KillerWidth { get; set; }
-        public int Ammo { get; set; }
-        public int LastAmmo { get; set; }
+        public Point KillerPoint;
+        public int KillerHeight;
+        public int KillerWidth;
+        public int Ammo;
+        public int LastAmmo;
 
         public Player()
         {

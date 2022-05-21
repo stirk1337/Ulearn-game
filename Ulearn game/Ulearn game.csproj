@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Bullet.cs" />
     <Compile Include="Entities.cs" />
+    <Compile Include="Levels.cs" />
     <Compile Include="LoopStreamNAudio.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="FormInit.cs">
@@ -150,12 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\54427.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\player\bita\idle.jpg" />
