@@ -16,5 +16,5 @@
 * Здоровье каждой сущности равна одному
 
 # Как скачать?
-Скачать и распаковать архив
-Открыть: Ulearn game/bin/Release/Ulearn game.exe
+* Скачать и распаковать архив
+* Открыть: Ulearn game/bin/Release/Ulearn game.exe
