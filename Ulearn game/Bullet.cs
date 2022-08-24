@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Xml;
 
 namespace Ulearn_game
 {
     public class Bullet
     {
-        private float Angle;
+        private readonly float Angle;
         public int Width;
         public int Height;
-        private Bitmap Sprite;
+        private readonly Bitmap Sprite;
         public PointF Point;
         private Point Destination;
         public float Speed;
@@ -16,6 +18,7 @@ namespace Ulearn_game
         public float SpeedY;
         private bool Calculated;
         public bool IsAlly;
+        public int LastX, LastY;
 
         public Bullet(float angle, int deltaWidth, int deltaHeight, int destX, int destY, Point playerPoint, bool isAlly)
         {
@@ -28,6 +31,8 @@ namespace Ulearn_game
             Calculated = false;
             Point = new PointF(playerPoint.X + deltaWidth / 2, playerPoint.Y + deltaHeight / 2);
             IsAlly = isAlly;
+            LastX = (int)(Point.X + Width / 2) / 100;
+            LastY = (int)(Point.Y + Height / 2) / 100;
         }
 
         public void OnPaint(Graphics g, int index)
@@ -66,7 +71,7 @@ namespace Ulearn_game
             var y = (int)(Point.Y + Height / 2) / 100;
             try
             {
-                if (Game.Level[x, y] == 2 || Game.Level[x, y] == 4 || (Game.Level[x,y] == 5 && IsAlly))
+                if (Game.Level[x, y] == 2 || Game.Level[x, y] == 4 || (Game.Level[x, y] == 5 && IsAlly))
                 {
                     Game.PlaySound("HitWall");
                     return true;

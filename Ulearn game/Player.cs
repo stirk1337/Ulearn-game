@@ -67,7 +67,7 @@ namespace Ulearn_game
             };
         }
 
-        public void Move()
+        public new void Move()
         {
             if (Right)
             {
@@ -182,7 +182,8 @@ namespace Ulearn_game
                 Game.PlaySound("noAmmo");
             }
         }
-        public void IsGettingMeleeDamage()
+        
+        public new void IsGettingMeleeDamage()
         {
             foreach (var bandit in Game.Bandits)
             {
@@ -195,7 +196,7 @@ namespace Ulearn_game
                 }
             }
         }
-        public void IsGettingRangeDamage()
+        public new void IsGettingRangeDamage()
         {
             foreach (var bullet in Game.Bullets)
             {

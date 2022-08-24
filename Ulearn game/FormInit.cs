@@ -13,7 +13,7 @@ namespace Ulearn_game
         public static Player Player;
         public static List<Bandit> Bandits = new List<Bandit>();
         public static List<Bullet> Bullets;
-        Timer mainTimer = new Timer();
+        readonly Timer mainTimer = new Timer();
         public static int[,] Level;
         public static int Kills;
         public static int LevelNumber;
@@ -102,11 +102,10 @@ namespace Ulearn_game
         public void CreateInterface(Graphics g)
         {
             var font = new Font("Comic Sans MS", 32);
-            StringFormat drawFormat = new StringFormat();
             SolidBrush drawBrush = new SolidBrush(Color.Black);
             g.DrawString("Патроны: " + Player.Ammo.ToString(), font, drawBrush, 100,820);
             var timeReady = !IsTimeStop && !IsTimeBackAfterStop ? "ГОТОВО": "НЕ ГОТОВО";
-            g.DrawString("Замедление времени: " + timeReady, font, drawBrush, 950, 820);
+            g.DrawString("Сменить оружие(Q)     Замедление времени(E): " + timeReady, font, drawBrush, 450, 820);
             if (IsGameEnd)
             {
                 drawBrush = new SolidBrush(Color.White);
@@ -142,7 +141,6 @@ namespace Ulearn_game
                 Player.Dead(g);
                 PlaySound("kill");
                 var font = new Font("Comic Sans MS", 70);
-                StringFormat drawFormat = new StringFormat();
                 SolidBrush drawBrush = new SolidBrush(Color.White);
                 g.DrawString("Нажми R, чтобы начать сначала", font, drawBrush, 100,400);
                 mainTimer.Stop();
